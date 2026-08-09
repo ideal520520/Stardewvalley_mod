@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:radioactive_ore",
+    "stardewvalley:bone_fragment",
+    "stardewvalley:bone_fragment",
+    "stardewvalley:bone_fragment",
+    "stardewvalley:solar_essence"
+  ],
+  "result": {
+    "id": "stardewvalley:hyper_speed-gro",
+    "count": 5
+  }
+}

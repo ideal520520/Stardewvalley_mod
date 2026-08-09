@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:fish_green_algae",
+    "stardewvalley:fish_green_algae",
+    "stardewvalley:fish_green_algae",
+    "stardewvalley:fish_green_algae"
+  ],
+  "result": {
+    "id": "stardewvalley:algae_soup",
+    "count": 1
+  }
+}

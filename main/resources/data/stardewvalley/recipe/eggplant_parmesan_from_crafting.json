@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:eggplant",
+    "#stardewvalley:tomato"
+  ],
+  "result": {
+    "id": "stardewvalley:eggplant_parmesan",
+    "count": 1
+  }
+}

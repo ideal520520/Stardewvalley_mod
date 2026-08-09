@@ -1,0 +1,43 @@
+{
+	"variants": {
+		"age=0": {
+			"model": "stardewvalley:block/crop/fairyrose/stage1"
+		},
+		"age=1": {
+			"model": "stardewvalley:block/crop/fairyrose/stage2"
+		},
+		"age=2": {
+			"model": "stardewvalley:block/crop/fairyrose/stage2"
+		},
+		"age=3": {
+			"model": "stardewvalley:block/crop/fairyrose/stage2"
+		},
+		"age=4": {
+			"model": "stardewvalley:block/crop/fairyrose/stage2"
+		},
+		"age=5": {
+			"model": "stardewvalley:block/crop/fairyrose/stage3"
+		},
+		"age=6": {
+			"model": "stardewvalley:block/crop/fairyrose/stage3"
+		},
+		"age=7": {
+			"model": "stardewvalley:block/crop/fairyrose/stage3"
+		},
+		"age=8": {
+			"model": "stardewvalley:block/crop/fairyrose/stage3"
+		},
+		"age=9": {
+			"model": "stardewvalley:block/crop/fairyrose/stage4"
+		},
+		"age=10": {
+			"model": "stardewvalley:block/crop/fairyrose/stage4"
+		},
+		"age=11": {
+			"model": "stardewvalley:block/crop/fairyrose/stage4"
+		},
+		"age=12": {
+			"model": "stardewvalley:block/crop/fairyrose/harvest"
+		}
+	}
+}

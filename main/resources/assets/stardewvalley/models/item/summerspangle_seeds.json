@@ -1,0 +1,473 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "stardewvalley:item/spangleseeds",
+		"particle": "stardewvalley:item/spangleseeds"
+	},
+	"elements": [
+		{
+			"name": "spangleseeds_0",
+			"from": [
+				4,
+				0,
+				7.5
+			],
+			"to": [
+				12,
+				16,
+				8.5
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						12,
+						0,
+						4,
+						16
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						11,
+						0,
+						12,
+						16
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						4,
+						0,
+						12,
+						16
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						4,
+						0,
+						5,
+						16
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						4,
+						0,
+						12,
+						1
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						4,
+						15,
+						12,
+						16
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "spangleseeds_1",
+			"from": [
+				3,
+				1,
+				7.5
+			],
+			"to": [
+				4,
+				15,
+				8.5
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						4,
+						1,
+						3,
+						15
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						3,
+						1,
+						4,
+						15
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						3,
+						1,
+						4,
+						15
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						3,
+						1,
+						4,
+						15
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						3,
+						1,
+						4,
+						2
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						3,
+						14,
+						4,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "spangleseeds_2",
+			"from": [
+				12,
+				1,
+				7.5
+			],
+			"to": [
+				13,
+				15,
+				8.5
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						13,
+						1,
+						12,
+						15
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						12,
+						1,
+						13,
+						15
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						12,
+						1,
+						13,
+						15
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						12,
+						1,
+						13,
+						15
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						12,
+						1,
+						13,
+						2
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						12,
+						14,
+						13,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "spangleseeds_3",
+			"from": [
+				2,
+				2,
+				7.5
+			],
+			"to": [
+				3,
+				14,
+				8.5
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						3,
+						2,
+						2,
+						14
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						2,
+						2,
+						3,
+						14
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						2,
+						2,
+						3,
+						14
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						2,
+						2,
+						3,
+						14
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						2,
+						2,
+						3,
+						3
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						2,
+						13,
+						3,
+						14
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "spangleseeds_4",
+			"from": [
+				13,
+				2,
+				7.5
+			],
+			"to": [
+				14,
+				14,
+				8.5
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						14,
+						2,
+						13,
+						14
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						13,
+						2,
+						14,
+						14
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						13,
+						2,
+						14,
+						14
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						13,
+						2,
+						14,
+						14
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						13,
+						2,
+						14,
+						3
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						13,
+						13,
+						14,
+						14
+					],
+					"texture": "#0"
+				}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [
+				0,
+				3,
+				1
+			],
+			"scale": [
+				0.55,
+				0.55,
+				0.55
+			]
+		},
+		"thirdperson_lefthand": {
+			"translation": [
+				0,
+				3,
+				1
+			],
+			"scale": [
+				0.55,
+				0.55,
+				0.55
+			]
+		},
+		"firstperson_righthand": {
+			"rotation": [
+				0,
+				-90,
+				25
+			],
+			"translation": [
+				1.13,
+				3.2,
+				1.13
+			],
+			"scale": [
+				0.68,
+				0.68,
+				0.68
+			]
+		},
+		"firstperson_lefthand": {
+			"rotation": [
+				0,
+				-90,
+				25
+			],
+			"translation": [
+				1.13,
+				3.2,
+				1.13
+			],
+			"scale": [
+				0.68,
+				0.68,
+				0.68
+			]
+		},
+		"ground": {
+			"translation": [
+				0,
+				2,
+				0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			]
+		},
+		"head": {
+			"rotation": [
+				0,
+				-180,
+				0
+			],
+			"translation": [
+				0,
+				13,
+				7
+			]
+		},
+		"fixed": {
+			"rotation": [
+				0,
+				-180,
+				0
+			]
+		},
+		"on_shelf": {
+			"rotation": [
+				0,
+				-180,
+				0
+			]
+		}
+	},
+	"groups": [
+		{
+			"name": "spangleseeds",
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				0,
+				1,
+				2,
+				3,
+				4
+			]
+		}
+	]
+}

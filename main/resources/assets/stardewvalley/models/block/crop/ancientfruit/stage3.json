@@ -1,0 +1,196 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"texture_size": [16, 32],
+	"textures": {
+		"0": "stardewvalley:block/crop/ancientfruit/stage3",
+		"particle": "stardewvalley:block/crop/ancientfruit/stage3"
+	},
+	"elements": [
+		{
+			"name": "stage3_0",
+			"from": [8.5, 3, 8],
+			"to": [12.5, 11, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [10, 7, 6, 11], "texture": "#0"},
+				"east": {"uv": [9, 7, 10, 11], "texture": "#0"},
+				"south": {"uv": [6, 7, 10, 11], "texture": "#0"},
+				"west": {"uv": [6, 7, 7, 11], "texture": "#0"},
+				"up": {"uv": [6, 7, 10, 7.5], "texture": "#0"},
+				"down": {"uv": [6, 10.5, 10, 11], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_1",
+			"from": [7.5, -1, 8],
+			"to": [8.5, 10, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [6, 7.5, 5, 13], "texture": "#0"},
+				"east": {"uv": [5, 7.5, 6, 13], "texture": "#0"},
+				"south": {"uv": [5, 7.5, 6, 13], "texture": "#0"},
+				"west": {"uv": [5, 7.5, 6, 13], "texture": "#0"},
+				"up": {"uv": [5, 7.5, 6, 8], "texture": "#0"},
+				"down": {"uv": [5, 12.5, 6, 13], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_2",
+			"from": [12.5, 4, 8],
+			"to": [13.5, 10, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [11, 7.5, 10, 10.5], "texture": "#0"},
+				"east": {"uv": [10, 7.5, 11, 10.5], "texture": "#0"},
+				"south": {"uv": [10, 7.5, 11, 10.5], "texture": "#0"},
+				"west": {"uv": [10, 7.5, 11, 10.5], "texture": "#0"},
+				"up": {"uv": [10, 7.5, 11, 8], "texture": "#0"},
+				"down": {"uv": [10, 10, 11, 10.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_3",
+			"from": [6.5, -1, 8],
+			"to": [7.5, 9, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [5, 8, 4, 13], "texture": "#0"},
+				"east": {"uv": [4, 8, 5, 13], "texture": "#0"},
+				"south": {"uv": [4, 8, 5, 13], "texture": "#0"},
+				"west": {"uv": [4, 8, 5, 13], "texture": "#0"},
+				"up": {"uv": [4, 8, 5, 8.5], "texture": "#0"},
+				"down": {"uv": [4, 12.5, 5, 13], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_4",
+			"from": [13.5, 5, 8],
+			"to": [14.5, 9, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [12, 8, 11, 10], "texture": "#0"},
+				"east": {"uv": [11, 8, 12, 10], "texture": "#0"},
+				"south": {"uv": [11, 8, 12, 10], "texture": "#0"},
+				"west": {"uv": [11, 8, 12, 10], "texture": "#0"},
+				"up": {"uv": [11, 8, 12, 8.5], "texture": "#0"},
+				"down": {"uv": [11, 9.5, 12, 10], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_5",
+			"from": [8.5, -1, 8],
+			"to": [9.5, 3, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [7, 11, 6, 13], "texture": "#0"},
+				"east": {"uv": [6, 11, 7, 13], "texture": "#0"},
+				"south": {"uv": [6, 11, 7, 13], "texture": "#0"},
+				"west": {"uv": [6, 11, 7, 13], "texture": "#0"},
+				"up": {"uv": [6, 11, 7, 11.5], "texture": "#0"},
+				"down": {"uv": [6, 12.5, 7, 13], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_0",
+			"from": [8.5, 3, 8],
+			"to": [12.5, 11, 8],
+			"rotation": {"x": 0, "y": 90, "z": 0, "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [10, 7, 6, 11], "texture": "#0"},
+				"east": {"uv": [9, 7, 10, 11], "texture": "#0"},
+				"south": {"uv": [6, 7, 10, 11], "texture": "#0"},
+				"west": {"uv": [6, 7, 7, 11], "texture": "#0"},
+				"up": {"uv": [6, 7, 10, 7.5], "texture": "#0"},
+				"down": {"uv": [6, 10.5, 10, 11], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_1",
+			"from": [7.5, -1, 8],
+			"to": [8.5, 10, 8],
+			"rotation": {"x": 0, "y": 90, "z": 0, "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [6, 7.5, 5, 13], "texture": "#0"},
+				"east": {"uv": [5, 7.5, 6, 13], "texture": "#0"},
+				"south": {"uv": [5, 7.5, 6, 13], "texture": "#0"},
+				"west": {"uv": [5, 7.5, 6, 13], "texture": "#0"},
+				"up": {"uv": [5, 7.5, 6, 8], "texture": "#0"},
+				"down": {"uv": [5, 12.5, 6, 13], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_2",
+			"from": [12.5, 4, 8],
+			"to": [13.5, 10, 8],
+			"rotation": {"x": 0, "y": 90, "z": 0, "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [11, 7.5, 10, 10.5], "texture": "#0"},
+				"east": {"uv": [10, 7.5, 11, 10.5], "texture": "#0"},
+				"south": {"uv": [10, 7.5, 11, 10.5], "texture": "#0"},
+				"west": {"uv": [10, 7.5, 11, 10.5], "texture": "#0"},
+				"up": {"uv": [10, 7.5, 11, 8], "texture": "#0"},
+				"down": {"uv": [10, 10, 11, 10.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_3",
+			"from": [6.5, -1, 8],
+			"to": [7.5, 9, 8],
+			"rotation": {"x": 0, "y": 90, "z": 0, "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [5, 8, 4, 13], "texture": "#0"},
+				"east": {"uv": [4, 8, 5, 13], "texture": "#0"},
+				"south": {"uv": [4, 8, 5, 13], "texture": "#0"},
+				"west": {"uv": [4, 8, 5, 13], "texture": "#0"},
+				"up": {"uv": [4, 8, 5, 8.5], "texture": "#0"},
+				"down": {"uv": [4, 12.5, 5, 13], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_4",
+			"from": [13.5, 5, 8],
+			"to": [14.5, 9, 8],
+			"rotation": {"x": 0, "y": 90, "z": 0, "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [12, 8, 11, 10], "texture": "#0"},
+				"east": {"uv": [11, 8, 12, 10], "texture": "#0"},
+				"south": {"uv": [11, 8, 12, 10], "texture": "#0"},
+				"west": {"uv": [11, 8, 12, 10], "texture": "#0"},
+				"up": {"uv": [11, 8, 12, 8.5], "texture": "#0"},
+				"down": {"uv": [11, 9.5, 12, 10], "texture": "#0"}
+			}
+		},
+		{
+			"name": "stage3_5",
+			"from": [8.5, -1, 8],
+			"to": [9.5, 3, 8],
+			"rotation": {"x": 0, "y": 90, "z": 0, "origin": [8.5, -1, 8]},
+			"faces": {
+				"north": {"uv": [7, 11, 6, 13], "texture": "#0"},
+				"east": {"uv": [6, 11, 7, 13], "texture": "#0"},
+				"south": {"uv": [6, 11, 7, 13], "texture": "#0"},
+				"west": {"uv": [6, 11, 7, 13], "texture": "#0"},
+				"up": {"uv": [6, 11, 7, 11.5], "texture": "#0"},
+				"down": {"uv": [6, 12.5, 7, 13], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "stage3",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5]
+		},
+		{
+			"name": "stage3",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [6, 7, 8, 9, 10, 11]
+		}
+	]
+}

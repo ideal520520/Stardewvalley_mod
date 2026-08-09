@@ -1,0 +1,207 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "stardewvalley:item/smoked_fish/smoked_glacierfish_gold",
+		"particle": "stardewvalley:item/smoked_fish/smoked_glacierfish_gold"
+	},
+	"elements": [
+		{
+			"name": "smoked_glacierfish_0",
+			"from": [10, 6, 7.5],
+			"to": [15, 15, 8.5],
+			"faces": {
+				"north": {"uv": [15, 1, 10, 10], "texture": "#0"},
+				"east": {"uv": [14, 1, 15, 10], "texture": "#0"},
+				"south": {"uv": [10, 1, 15, 10], "texture": "#0"},
+				"west": {"uv": [10, 1, 11, 10], "texture": "#0"},
+				"up": {"uv": [10, 1, 15, 2], "texture": "#0"},
+				"down": {"uv": [10, 9, 15, 10], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_1",
+			"from": [6, 6, 7.5],
+			"to": [10, 14, 8.5],
+			"faces": {
+				"north": {"uv": [10, 2, 6, 10], "texture": "#0"},
+				"east": {"uv": [9, 2, 10, 10], "texture": "#0"},
+				"south": {"uv": [6, 2, 10, 10], "texture": "#0"},
+				"west": {"uv": [6, 2, 7, 10], "texture": "#0"},
+				"up": {"uv": [6, 2, 10, 3], "texture": "#0"},
+				"down": {"uv": [6, 9, 10, 10], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_2",
+			"from": [15, 7, 7.5],
+			"to": [16, 14, 8.5],
+			"faces": {
+				"north": {"uv": [16, 2, 15, 9], "texture": "#0"},
+				"east": {"uv": [15, 2, 16, 9], "texture": "#0"},
+				"south": {"uv": [15, 2, 16, 9], "texture": "#0"},
+				"west": {"uv": [15, 2, 16, 9], "texture": "#0"},
+				"up": {"uv": [15, 2, 16, 3], "texture": "#0"},
+				"down": {"uv": [15, 8, 16, 9], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_3",
+			"from": [1, 0, 7.5],
+			"to": [6, 13, 8.5],
+			"faces": {
+				"north": {"uv": [6, 3, 1, 16], "texture": "#0"},
+				"east": {"uv": [5, 3, 6, 16], "texture": "#0"},
+				"south": {"uv": [1, 3, 6, 16], "texture": "#0"},
+				"west": {"uv": [1, 3, 2, 16], "texture": "#0"},
+				"up": {"uv": [1, 3, 6, 4], "texture": "#0"},
+				"down": {"uv": [1, 15, 6, 16], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_4",
+			"from": [0, 8, 7.5],
+			"to": [1, 12, 8.5],
+			"faces": {
+				"north": {"uv": [1, 4, 0, 8], "texture": "#0"},
+				"east": {"uv": [0, 4, 1, 8], "texture": "#0"},
+				"south": {"uv": [0, 4, 1, 8], "texture": "#0"},
+				"west": {"uv": [0, 4, 1, 8], "texture": "#0"},
+				"up": {"uv": [0, 4, 1, 5], "texture": "#0"},
+				"down": {"uv": [0, 7, 1, 8], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_5",
+			"from": [0, 4, 7.5],
+			"to": [1, 6, 8.5],
+			"faces": {
+				"north": {"uv": [1, 10, 0, 12], "texture": "#0"},
+				"east": {"uv": [0, 10, 1, 12], "texture": "#0"},
+				"south": {"uv": [0, 10, 1, 12], "texture": "#0"},
+				"west": {"uv": [0, 10, 1, 12], "texture": "#0"},
+				"up": {"uv": [0, 10, 1, 11], "texture": "#0"},
+				"down": {"uv": [0, 11, 1, 12], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_6",
+			"from": [6, 0, 7.5],
+			"to": [8, 6, 8.5],
+			"faces": {
+				"north": {"uv": [8, 10, 6, 16], "texture": "#0"},
+				"east": {"uv": [7, 10, 8, 16], "texture": "#0"},
+				"south": {"uv": [6, 10, 8, 16], "texture": "#0"},
+				"west": {"uv": [6, 10, 7, 16], "texture": "#0"},
+				"up": {"uv": [6, 10, 8, 11], "texture": "#0"},
+				"down": {"uv": [6, 15, 8, 16], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_7",
+			"from": [8, 5, 7.5],
+			"to": [9, 6, 8.5],
+			"faces": {
+				"north": {"uv": [9, 10, 8, 11], "texture": "#0"},
+				"east": {"uv": [8, 10, 9, 11], "texture": "#0"},
+				"south": {"uv": [8, 10, 9, 11], "texture": "#0"},
+				"west": {"uv": [8, 10, 9, 11], "texture": "#0"},
+				"up": {"uv": [8, 10, 9, 11], "texture": "#0"},
+				"down": {"uv": [8, 10, 9, 11], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_8",
+			"from": [10, 5, 7.5],
+			"to": [14, 6, 8.5],
+			"faces": {
+				"north": {"uv": [14, 10, 10, 11], "texture": "#0"},
+				"east": {"uv": [13, 10, 14, 11], "texture": "#0"},
+				"south": {"uv": [10, 10, 14, 11], "texture": "#0"},
+				"west": {"uv": [10, 10, 11, 11], "texture": "#0"},
+				"up": {"uv": [10, 10, 14, 11], "texture": "#0"},
+				"down": {"uv": [10, 10, 14, 11], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_9",
+			"from": [10, 3, 7.5],
+			"to": [11, 5, 8.5],
+			"faces": {
+				"north": {"uv": [11, 11, 10, 13], "texture": "#0"},
+				"east": {"uv": [10, 11, 11, 13], "texture": "#0"},
+				"south": {"uv": [10, 11, 11, 13], "texture": "#0"},
+				"west": {"uv": [10, 11, 11, 13], "texture": "#0"},
+				"up": {"uv": [10, 11, 11, 12], "texture": "#0"},
+				"down": {"uv": [10, 12, 11, 13], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_10",
+			"from": [13, 3, 7.5],
+			"to": [14, 5, 8.5],
+			"faces": {
+				"north": {"uv": [14, 11, 13, 13], "texture": "#0"},
+				"east": {"uv": [13, 11, 14, 13], "texture": "#0"},
+				"south": {"uv": [13, 11, 14, 13], "texture": "#0"},
+				"west": {"uv": [13, 11, 14, 13], "texture": "#0"},
+				"up": {"uv": [13, 11, 14, 12], "texture": "#0"},
+				"down": {"uv": [13, 12, 14, 13], "texture": "#0"}
+			}
+		},
+		{
+			"name": "smoked_glacierfish_11",
+			"from": [0, 0, 7.5],
+			"to": [1, 2, 8.5],
+			"faces": {
+				"north": {"uv": [1, 14, 0, 16], "texture": "#0"},
+				"east": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"west": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"up": {"uv": [0, 14, 1, 15], "texture": "#0"},
+				"down": {"uv": [0, 15, 1, 16], "texture": "#0"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 3, 1]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 3, 1]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"ground": {
+			"translation": [0, 3.5, 0]
+		},
+		"head": {
+			"rotation": [0, -180, 0],
+			"translation": [0, 13, 7]
+		},
+		"fixed": {
+			"rotation": [0, -180, 0]
+		},
+		"on_shelf": {
+			"rotation": [0, -180, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "smoked_glacierfish",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+		}
+	]
+}

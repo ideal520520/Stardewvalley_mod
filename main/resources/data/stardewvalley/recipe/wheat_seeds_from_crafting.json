@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:wheat_seeds",
+    "minecraft:wheat_seeds",
+    "minecraft:wheat_seeds",
+    "minecraft:wheat_seeds"
+  ],
+  "result": {
+    "id": "stardewvalley:wheat_seeds",
+    "count": 1
+  }
+}

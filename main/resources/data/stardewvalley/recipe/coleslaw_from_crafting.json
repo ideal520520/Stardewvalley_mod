@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:redcabbage",
+    "stardewvalley:vinegar",
+    "stardewvalley:mayonnaise"
+  ],
+  "result": {
+    "id": "stardewvalley:coleslaw",
+    "count": 1
+  }
+}

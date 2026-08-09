@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:iron_bar",
+    "stardewvalley:gold_bar",
+    "stardewvalley:refined_quartz"
+  ],
+  "result": {
+    "id": "stardewvalley:quality_sprinkler",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:bokchoy",
+    "#stardewvalley:cranberries",
+    "#stardewvalley:artichoke"
+  ],
+  "result": {
+    "id": "stardewvalley:super_meal",
+    "count": 1
+  }
+}

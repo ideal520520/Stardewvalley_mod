@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:iridium_bar",
+    "stardewvalley:caiji_sap",
+    "stardewvalley:caiji_sap",
+    "stardewvalley:caiji_sap",
+    "stardewvalley:caiji_sap",
+    "stardewvalley:caiji_sap"
+  ],
+  "result": {
+    "id": "stardewvalley:deluxe_fertilizer",
+    "count": 5
+  }
+}

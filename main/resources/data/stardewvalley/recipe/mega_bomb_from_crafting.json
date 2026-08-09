@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:gold_ore",
+    "stardewvalley:gold_ore",
+    "stardewvalley:gold_ore",
+    "stardewvalley:gold_ore",
+    "stardewvalley:solar_essence",
+    "stardewvalley:void_essence"
+  ],
+  "result": {
+    "id": "stardewvalley:mega_bomb",
+    "count": 1
+  }
+}

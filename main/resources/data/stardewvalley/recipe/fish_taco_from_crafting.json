@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:fish_tuna",
+    "stardewvalley:tortilla",
+    "#stardewvalley:redcabbage",
+    "stardewvalley:mayonnaise"
+  ],
+  "result": {
+    "id": "stardewvalley:fish_taco",
+    "count": 1
+  }
+}

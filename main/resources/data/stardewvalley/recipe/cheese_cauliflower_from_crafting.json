@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:cauliflower",
+    "stardewvalley:cheese"
+  ],
+  "result": {
+    "id": "stardewvalley:cheese_cauliflower",
+    "count": 1
+  }
+}

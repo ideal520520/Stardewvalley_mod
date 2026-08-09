@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:fishes",
+    "#stardewvalley:caiji_seaweed",
+    "stardewvalley:rice"
+  ],
+  "result": {
+    "id": "stardewvalley:maki_roll",
+    "count": 1
+  }
+}

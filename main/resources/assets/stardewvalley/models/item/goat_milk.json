@@ -1,0 +1,171 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "stardewvalley:item/goat_milk",
+		"particle": "stardewvalley:item/goat_milk"
+	},
+	"elements": [
+		{
+			"name": "goat_milk_0",
+			"from": [7, 1, 7.5],
+			"to": [9, 16, 8.5],
+			"faces": {
+				"north": {"uv": [9, 0, 7, 15], "texture": "#0"},
+				"east": {"uv": [8, 0, 9, 15], "texture": "#0"},
+				"south": {"uv": [7, 0, 9, 15], "texture": "#0"},
+				"west": {"uv": [7, 0, 8, 15], "texture": "#0"},
+				"up": {"uv": [7, 0, 9, 1], "texture": "#0"},
+				"down": {"uv": [7, 14, 9, 15], "texture": "#0"}
+			}
+		},
+		{
+			"name": "goat_milk_1",
+			"from": [6, 1, 7.5],
+			"to": [7, 15, 8.5],
+			"faces": {
+				"north": {"uv": [7, 1, 6, 15], "texture": "#0"},
+				"east": {"uv": [6, 1, 7, 15], "texture": "#0"},
+				"south": {"uv": [6, 1, 7, 15], "texture": "#0"},
+				"west": {"uv": [6, 1, 7, 15], "texture": "#0"},
+				"up": {"uv": [6, 1, 7, 2], "texture": "#0"},
+				"down": {"uv": [6, 14, 7, 15], "texture": "#0"}
+			}
+		},
+		{
+			"name": "goat_milk_2",
+			"from": [9, 1, 7.5],
+			"to": [10, 15, 8.5],
+			"faces": {
+				"north": {"uv": [10, 1, 9, 15], "texture": "#0"},
+				"east": {"uv": [9, 1, 10, 15], "texture": "#0"},
+				"south": {"uv": [9, 1, 10, 15], "texture": "#0"},
+				"west": {"uv": [9, 1, 10, 15], "texture": "#0"},
+				"up": {"uv": [9, 1, 10, 2], "texture": "#0"},
+				"down": {"uv": [9, 14, 10, 15], "texture": "#0"}
+			}
+		},
+		{
+			"name": "goat_milk_3",
+			"from": [5, 1, 7.5],
+			"to": [6, 14, 8.5],
+			"faces": {
+				"north": {"uv": [6, 2, 5, 15], "texture": "#0"},
+				"east": {"uv": [5, 2, 6, 15], "texture": "#0"},
+				"south": {"uv": [5, 2, 6, 15], "texture": "#0"},
+				"west": {"uv": [5, 2, 6, 15], "texture": "#0"},
+				"up": {"uv": [5, 2, 6, 3], "texture": "#0"},
+				"down": {"uv": [5, 14, 6, 15], "texture": "#0"}
+			}
+		},
+		{
+			"name": "goat_milk_4",
+			"from": [10, 1, 7.5],
+			"to": [11, 14, 8.5],
+			"faces": {
+				"north": {"uv": [11, 2, 10, 15], "texture": "#0"},
+				"east": {"uv": [10, 2, 11, 15], "texture": "#0"},
+				"south": {"uv": [10, 2, 11, 15], "texture": "#0"},
+				"west": {"uv": [10, 2, 11, 15], "texture": "#0"},
+				"up": {"uv": [10, 2, 11, 3], "texture": "#0"},
+				"down": {"uv": [10, 14, 11, 15], "texture": "#0"}
+			}
+		},
+		{
+			"name": "goat_milk_5",
+			"from": [4, 2, 7.5],
+			"to": [5, 10, 8.5],
+			"faces": {
+				"north": {"uv": [5, 6, 4, 14], "texture": "#0"},
+				"east": {"uv": [4, 6, 5, 14], "texture": "#0"},
+				"south": {"uv": [4, 6, 5, 14], "texture": "#0"},
+				"west": {"uv": [4, 6, 5, 14], "texture": "#0"},
+				"up": {"uv": [4, 6, 5, 7], "texture": "#0"},
+				"down": {"uv": [4, 13, 5, 14], "texture": "#0"}
+			}
+		},
+		{
+			"name": "goat_milk_6",
+			"from": [11, 2, 7.5],
+			"to": [12, 10, 8.5],
+			"faces": {
+				"north": {"uv": [12, 6, 11, 14], "texture": "#0"},
+				"east": {"uv": [11, 6, 12, 14], "texture": "#0"},
+				"south": {"uv": [11, 6, 12, 14], "texture": "#0"},
+				"west": {"uv": [11, 6, 12, 14], "texture": "#0"},
+				"up": {"uv": [11, 6, 12, 7], "texture": "#0"},
+				"down": {"uv": [11, 13, 12, 14], "texture": "#0"}
+			}
+		},
+		{
+			"name": "goat_milk_7",
+			"from": [3, 3, 7.5],
+			"to": [4, 8, 8.5],
+			"faces": {
+				"north": {"uv": [4, 8, 3, 13], "texture": "#0"},
+				"east": {"uv": [3, 8, 4, 13], "texture": "#0"},
+				"south": {"uv": [3, 8, 4, 13], "texture": "#0"},
+				"west": {"uv": [3, 8, 4, 13], "texture": "#0"},
+				"up": {"uv": [3, 8, 4, 9], "texture": "#0"},
+				"down": {"uv": [3, 12, 4, 13], "texture": "#0"}
+			}
+		},
+		{
+			"name": "goat_milk_8",
+			"from": [12, 3, 7.5],
+			"to": [13, 8, 8.5],
+			"faces": {
+				"north": {"uv": [13, 8, 12, 13], "texture": "#0"},
+				"east": {"uv": [12, 8, 13, 13], "texture": "#0"},
+				"south": {"uv": [12, 8, 13, 13], "texture": "#0"},
+				"west": {"uv": [12, 8, 13, 13], "texture": "#0"},
+				"up": {"uv": [12, 8, 13, 9], "texture": "#0"},
+				"down": {"uv": [12, 12, 13, 13], "texture": "#0"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 3, 1],
+			"scale": [0.55, 0.55, 0.55]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 3, 1],
+			"scale": [0.55, 0.55, 0.55]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.68, 0.68, 0.68]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.68, 0.68, 0.68]
+		},
+		"ground": {
+			"translation": [0, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"head": {
+			"rotation": [0, -180, 0],
+			"translation": [0, 13, 7]
+		},
+		"fixed": {
+			"rotation": [0, -180, 0]
+		},
+		"on_shelf": {
+			"rotation": [0, -180, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "goat_milk",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+		}
+	]
+}

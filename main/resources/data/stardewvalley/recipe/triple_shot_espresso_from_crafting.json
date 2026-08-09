@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:coffee",
+    "stardewvalley:coffee",
+    "stardewvalley:coffee"
+  ],
+  "result": {
+    "id": "stardewvalley:triple_shot_espresso",
+    "count": 1
+  }
+}

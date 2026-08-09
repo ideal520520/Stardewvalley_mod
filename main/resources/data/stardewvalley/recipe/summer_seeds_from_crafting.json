@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:caiji_spiceberry",
+    "#stardewvalley:grape",
+    "#stardewvalley:caiji_sweetpea"
+  ],
+  "result": {
+    "id": "stardewvalley:summer_seeds",
+    "count": 10
+  }
+}

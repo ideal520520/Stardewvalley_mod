@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    [
+      "minecraft:egg",
+      "minecraft:blue_egg"
+    ]
+  ],
+  "result": {
+    "id": "stardewvalley:egg",
+    "count": 1
+  }
+}

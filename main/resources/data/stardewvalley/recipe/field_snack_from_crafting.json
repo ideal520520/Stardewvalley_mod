@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:acorn",
+    "stardewvalley:maple_seed",
+    "stardewvalley:pine_cone"
+  ],
+  "result": {
+    "id": "stardewvalley:field_snack",
+    "count": 1
+  }
+}

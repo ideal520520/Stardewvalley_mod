@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:fish_carp",
+    "#stardewvalley:fish_carp",
+    "#stardewvalley:fish_carp",
+    "#stardewvalley:fish_carp"
+  ],
+  "result": {
+    "id": "stardewvalley:carp_surprise",
+    "count": 1
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "stardewvalley:cherry_bomb_block",
+    "stardewvalley:bomb_block",
+    "stardewvalley:mega_bomb_block",
+    "stardewvalley:furnace",
+    "stardewvalley:sprinkler",
+    "stardewvalley:quality_sprinkler",
+    "stardewvalley:iridium_sprinkler",
+    "stardewvalley:lightning_rod"
+  ]
+}

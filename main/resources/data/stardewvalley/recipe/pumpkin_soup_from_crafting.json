@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:pumpkin",
+    "#stardewvalley:milk"
+  ],
+  "result": {
+    "id": "stardewvalley:pumpkin_soup",
+    "count": 1
+  }
+}

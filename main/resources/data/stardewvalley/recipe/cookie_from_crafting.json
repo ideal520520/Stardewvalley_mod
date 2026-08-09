@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:wheat_flour",
+    "stardewvalley:sugar",
+    "#stardewvalley:eggs"
+  ],
+  "result": {
+    "id": "stardewvalley:cookie",
+    "count": 1
+  }
+}

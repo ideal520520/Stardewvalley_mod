@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:pine_tar",
+    "stardewvalley:moss",
+    "stardewvalley:moss",
+    "stardewvalley:moss",
+    "stardewvalley:moss",
+    "stardewvalley:moss"
+  ],
+  "result": {
+    "id": "stardewvalley:speed-gro",
+    "count": 5
+  }
+}

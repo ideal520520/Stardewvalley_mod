@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "stardewvalley:gold_bar",
+    "stardewvalley:gold_bar"
+  ],
+  "result": {
+    "id": "stardewvalley:fishtool_treasure_hunter",
+    "count": 1
+  }
+}

@@ -1,0 +1,513 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "stardewvalley:block/crop/bluejazz/stage3",
+		"particle": "stardewvalley:block/crop/bluejazz/stage3"
+	},
+	"elements": [
+		{
+			"name": "stage3_0",
+			"from": [
+				7.5,
+				-1,
+				8
+			],
+			"to": [
+				8.5,
+				5,
+				8
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					8,
+					0,
+					8
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						9,
+						9,
+						8,
+						15
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						8,
+						9,
+						9,
+						15
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						8,
+						9,
+						9,
+						15
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						8,
+						9,
+						9,
+						15
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						8,
+						9,
+						9,
+						10
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						8,
+						14,
+						9,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "stage3_1",
+			"from": [
+				6.5,
+				-1,
+				8
+			],
+			"to": [
+				7.5,
+				4,
+				8
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					8,
+					0,
+					8
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						8,
+						10,
+						7,
+						15
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						7,
+						10,
+						8,
+						15
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						7,
+						10,
+						8,
+						15
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						7,
+						10,
+						8,
+						15
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						7,
+						10,
+						8,
+						11
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						7,
+						14,
+						8,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "stage3_2",
+			"from": [
+				8.5,
+				-1,
+				8
+			],
+			"to": [
+				9.5,
+				4,
+				8
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					8,
+					0,
+					8
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						10,
+						10,
+						9,
+						15
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						9,
+						10,
+						10,
+						15
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						9,
+						10,
+						10,
+						15
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						9,
+						10,
+						10,
+						15
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						9,
+						10,
+						10,
+						11
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						9,
+						14,
+						10,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "stage3_0",
+			"from": [
+				7.5,
+				-1,
+				8
+			],
+			"to": [
+				8.5,
+				5,
+				8
+			],
+			"rotation": {
+				"x": 0,
+				"y": 90,
+				"z": 0,
+				"origin": [
+					8,
+					0,
+					8
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						9,
+						9,
+						8,
+						15
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						8,
+						9,
+						9,
+						15
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						8,
+						9,
+						9,
+						15
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						8,
+						9,
+						9,
+						15
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						8,
+						9,
+						9,
+						10
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						8,
+						14,
+						9,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "stage3_1",
+			"from": [
+				6.5,
+				-1,
+				8
+			],
+			"to": [
+				7.5,
+				4,
+				8
+			],
+			"rotation": {
+				"x": 0,
+				"y": 90,
+				"z": 0,
+				"origin": [
+					8,
+					0,
+					8
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						8,
+						10,
+						7,
+						15
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						7,
+						10,
+						8,
+						15
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						7,
+						10,
+						8,
+						15
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						7,
+						10,
+						8,
+						15
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						7,
+						10,
+						8,
+						11
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						7,
+						14,
+						8,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"name": "stage3_2",
+			"from": [
+				8.5,
+				-1,
+				8
+			],
+			"to": [
+				9.5,
+				4,
+				8
+			],
+			"rotation": {
+				"x": 0,
+				"y": 90,
+				"z": 0,
+				"origin": [
+					8,
+					0,
+					8
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						10,
+						10,
+						9,
+						15
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						9,
+						10,
+						10,
+						15
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						9,
+						10,
+						10,
+						15
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						9,
+						10,
+						10,
+						15
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						9,
+						10,
+						10,
+						11
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						9,
+						14,
+						10,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "stage3",
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				0,
+				1,
+				2
+			]
+		},
+		{
+			"name": "stage3",
+			"origin": [
+				8,
+				8,
+				8
+			],
+			"scope": 0,
+			"color": 0,
+			"children": [
+				3,
+				4,
+				5
+			]
+		}
+	]
+}

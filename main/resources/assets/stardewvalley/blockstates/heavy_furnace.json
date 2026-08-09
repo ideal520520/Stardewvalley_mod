@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "state=empty": { "model": "stardewvalley:block/heavy_furnace" },
+    "state=processing": { "model": "stardewvalley:block/heavy_furnace_processing" },
+    "state=done": { "model": "stardewvalley:block/heavy_furnace_processing" }
+  }
+}

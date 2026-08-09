@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:wheat_flour",
+    "#stardewvalley:tomato",
+    "stardewvalley:cheese"
+  ],
+  "result": {
+    "id": "stardewvalley:pizza",
+    "count": 1
+  }
+}

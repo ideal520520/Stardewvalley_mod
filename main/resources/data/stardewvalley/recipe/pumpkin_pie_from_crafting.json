@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:pumpkin",
+    "stardewvalley:wheat_flour",
+    "#stardewvalley:milk", "stardewvalley:sugar"
+  ],
+  "result": {
+    "id": "stardewvalley:pumpkin_pie",
+    "count": 1
+  }
+}
