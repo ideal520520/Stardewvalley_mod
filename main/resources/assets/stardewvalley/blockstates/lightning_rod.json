@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "charged=false": {"model": "stardewvalley:block/lightning_rod"},
-    "charged=true": {"model": "stardewvalley:block/lightning_rod"}
-  }
-}

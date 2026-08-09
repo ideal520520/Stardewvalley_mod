@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [ "#stardewvalley:fishes" ],
-  "result": {
-    "id": "stardewvalley:sashimi",
-    "count": 1
-  }
-}
