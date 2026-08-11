@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:caiji_cavecarrot",
+    "#stardewvalley:caiji_winterroot"
+  ],
+  "result": {
+    "id": "stardewvalley:roots_platter",
+    "count": 1
+  }
+}

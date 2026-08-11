@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:fish_squid",
+    "stardewvalley:wheat_flour",
+    "stardewvalley:oil"
+  ],
+  "result": {
+    "id": "stardewvalley:fried_calamari",
+    "count": 1
+  }
+}

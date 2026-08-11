@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:hardwood",
+    "stardewvalley:truffle_oil",
+    "stardewvalley:pine_tar",
+    "stardewvalley:pine_tar",
+    "stardewvalley:pine_tar",
+    "stardewvalley:pine_tar",
+    "stardewvalley:pine_tar"
+  ],
+  "result": {
+    "id": "stardewvalley:rain_totem",
+    "count": 1
+  }
+}

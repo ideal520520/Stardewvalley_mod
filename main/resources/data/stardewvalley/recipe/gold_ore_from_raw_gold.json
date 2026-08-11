@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:raw_gold"
+  ],
+  "result": {
+    "id": "stardewvalley:gold_ore",
+    "count": 1
+  }
+}

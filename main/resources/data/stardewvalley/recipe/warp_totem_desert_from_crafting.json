@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:hardwood",
+    "stardewvalley:hardwood",
+    "#stardewvalley:caiji_coconut",
+    "stardewvalley:iridium_ore",
+    "stardewvalley:iridium_ore",
+    "stardewvalley:iridium_ore",
+    "stardewvalley:iridium_ore"
+  ],
+  "result": {
+    "id": "stardewvalley:warp_totem_desert",
+    "count": 1
+  }
+}

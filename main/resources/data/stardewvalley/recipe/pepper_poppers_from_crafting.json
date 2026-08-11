@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:hotpepper",
+    "stardewvalley:cheese"
+  ],
+  "result": {
+    "id": "stardewvalley:pepper_poppers",
+    "count": 1
+  }
+}

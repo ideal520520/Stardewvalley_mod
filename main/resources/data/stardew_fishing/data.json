@@ -1,0 +1,485 @@
+{
+  "replace": false,
+  "behaviors": {
+    "stardewvalley:fish_carp": {
+      "idle_time": 54,
+      "top_speed": 2.4,
+      "up_acceleration": 0.36,
+      "down_acceleration": 0.36,
+      "avg_distance": 39,
+      "move_variation": 10
+    },
+    "stardewvalley:fish_smallmouth_bass": {
+      "idle_time": 48,
+      "top_speed": 3.2,
+      "up_acceleration": 0.41,
+      "down_acceleration": 0.41,
+      "avg_distance": 43,
+      "move_variation": 12
+    },
+    "stardewvalley:fish_sunfish": {
+      "idle_time": 48,
+      "top_speed": 3.3,
+      "up_acceleration": 0.42,
+      "down_acceleration": 0.42,
+      "avg_distance": 44,
+      "move_variation": 12
+    },
+    "stardewvalley:fish_perch": {
+      "idle_time": 46,
+      "top_speed": 3.6,
+      "up_acceleration": 0.44,
+      "down_acceleration": 0.44,
+      "avg_distance": 45,
+      "move_variation": 13
+    },
+    "stardewvalley:fish_red_snapper": {
+      "idle_time": 44,
+      "top_speed": 3.9,
+      "up_acceleration": 0.46,
+      "down_acceleration": 0.46,
+      "avg_distance": 47,
+      "move_variation": 14
+    },
+    "stardewvalley:fish_rainbow_trout": {
+      "idle_time": 42,
+      "top_speed": 4.2,
+      "up_acceleration": 0.48,
+      "down_acceleration": 0.48,
+      "avg_distance": 48,
+      "move_variation": 14
+    },
+    "stardewvalley:fish_largemouth_bass": {
+      "idle_time": 40,
+      "top_speed": 4.5,
+      "up_acceleration": 0.5,
+      "down_acceleration": 0.5,
+      "avg_distance": 50,
+      "move_variation": 15
+    },
+    "stardewvalley:fish_salmon": {
+      "idle_time": 40,
+      "top_speed": 4.5,
+      "up_acceleration": 0.5,
+      "down_acceleration": 0.5,
+      "avg_distance": 50,
+      "move_variation": 15
+    },
+    "stardewvalley:fish_ghostfish": {
+      "idle_time": 40,
+      "top_speed": 4.5,
+      "up_acceleration": 0.5,
+      "down_acceleration": 0.5,
+      "avg_distance": 50,
+      "move_variation": 15
+    },
+    "stardewvalley:fish_tilapia": {
+      "idle_time": 40,
+      "top_speed": 4.5,
+      "up_acceleration": 0.5,
+      "down_acceleration": 0.5,
+      "avg_distance": 50,
+      "move_variation": 15
+    },
+    "stardewvalley:fish_woodskip": {
+      "idle_time": 40,
+      "top_speed": 4.5,
+      "up_acceleration": 0.5,
+      "down_acceleration": 0.5,
+      "avg_distance": 50,
+      "move_variation": 15
+    },
+    "stardewvalley:fish_midnight_carp": {
+      "idle_time": 38,
+      "top_speed": 4.8,
+      "up_acceleration": 0.52,
+      "down_acceleration": 0.52,
+      "avg_distance": 51,
+      "move_variation": 16
+    },
+    "stardewvalley:fish_albacore": {
+      "idle_time": 36,
+      "top_speed": 5.1,
+      "up_acceleration": 0.54,
+      "down_acceleration": 0.54,
+      "avg_distance": 53,
+      "move_variation": 17
+    },
+    "stardewvalley:fish_sandfish": {
+      "idle_time": 34,
+      "top_speed": 5.4,
+      "up_acceleration": 0.56,
+      "down_acceleration": 0.56,
+      "avg_distance": 54,
+      "move_variation": 17
+    },
+    "stardewvalley:fish_catfish": {
+      "idle_time": 30,
+      "top_speed": 6.0,
+      "up_acceleration": 0.6,
+      "down_acceleration": 0.6,
+      "avg_distance": 57,
+      "move_variation": 19
+    },
+    "stardewvalley:fish_sturgeon": {
+      "idle_time": 28,
+      "top_speed": 6.2,
+      "up_acceleration": 0.61,
+      "down_acceleration": 0.61,
+      "avg_distance": 58,
+      "move_variation": 19
+    },
+    "stardewvalley:fish_dorado": {
+      "idle_time": 28,
+      "top_speed": 6.2,
+      "up_acceleration": 0.61,
+      "down_acceleration": 0.61,
+      "avg_distance": 58,
+      "move_variation": 19
+    },
+    "stardewvalley:fish_void_salmon": {
+      "idle_time": 28,
+      "top_speed": 6.3,
+      "up_acceleration": 0.62,
+      "down_acceleration": 0.62,
+      "avg_distance": 59,
+      "move_variation": 20
+    },
+    "stardewvalley:fish_lava_eel": {
+      "idle_time": 24,
+      "top_speed": 6.9,
+      "up_acceleration": 0.66,
+      "down_acceleration": 0.66,
+      "avg_distance": 62,
+      "move_variation": 21
+    },
+    "stardewvalley:fish_crimsonfish": {
+      "idle_time": 14,
+      "top_speed": 8.0,
+      "up_acceleration": 0.76,
+      "down_acceleration": 0.76,
+      "avg_distance": 70,
+      "move_variation": 25
+    },
+    "stardewvalley:fish_son_of_crimsonfish": {
+      "idle_time": 22,
+      "top_speed": 7.2,
+      "up_acceleration": 0.68,
+      "down_acceleration": 0.68,
+      "avg_distance": 63,
+      "move_variation": 22
+    },
+    "stardewvalley:fish_glacierfish": {
+      "idle_time": 12,
+      "top_speed": 8.2,
+      "up_acceleration": 0.78,
+      "down_acceleration": 0.78,
+      "avg_distance": 72,
+      "move_variation": 26
+    },
+    "stardewvalley:fish_glacierfish_jr": {
+      "idle_time": 20,
+      "top_speed": 7.5,
+      "up_acceleration": 0.7,
+      "down_acceleration": 0.7,
+      "avg_distance": 65,
+      "move_variation": 23
+    },
+    "stardewvalley:fish_legend": {
+      "idle_time": 10,
+      "top_speed": 9.0,
+      "up_acceleration": 0.82,
+      "down_acceleration": 0.82,
+      "avg_distance": 76,
+      "move_variation": 28
+    },
+    "stardewvalley:fish_legend_ii": {
+      "idle_time": 16,
+      "top_speed": 8.1,
+      "up_acceleration": 0.74,
+      "down_acceleration": 0.74,
+      "avg_distance": 68,
+      "move_variation": 24
+    },
+    "stardewvalley:fish_herring": {
+      "idle_time": 27,
+      "top_speed": 4.2,
+      "up_acceleration": 0.6,
+      "down_acceleration": 0.6,
+      "avg_distance": 31,
+      "move_variation": 16
+    },
+    "stardewvalley:fish_anchovy": {
+      "idle_time": 26,
+      "top_speed": 4.5,
+      "up_acceleration": 0.62,
+      "down_acceleration": 0.62,
+      "avg_distance": 32,
+      "move_variation": 17
+    },
+    "stardewvalley:fish_sardine": {
+      "idle_time": 26,
+      "top_speed": 4.5,
+      "up_acceleration": 0.62,
+      "down_acceleration": 0.62,
+      "avg_distance": 32,
+      "move_variation": 17
+    },
+    "stardewvalley:fish_chub": {
+      "idle_time": 24,
+      "top_speed": 4.8,
+      "up_acceleration": 0.64,
+      "down_acceleration": 0.64,
+      "avg_distance": 33,
+      "move_variation": 18
+    },
+    "stardewvalley:fish_slimejack": {
+      "idle_time": 18,
+      "top_speed": 5.8,
+      "up_acceleration": 0.72,
+      "down_acceleration": 0.72,
+      "avg_distance": 38,
+      "move_variation": 21
+    },
+    "stardewvalley:fish_goby": {
+      "idle_time": 18,
+      "top_speed": 5.8,
+      "up_acceleration": 0.72,
+      "down_acceleration": 0.72,
+      "avg_distance": 38,
+      "move_variation": 21
+    },
+    "stardewvalley:fish_pike": {
+      "idle_time": 17,
+      "top_speed": 6.0,
+      "up_acceleration": 0.74,
+      "down_acceleration": 0.74,
+      "avg_distance": 40,
+      "move_variation": 22
+    },
+    "stardewvalley:fish_tiger_trout": {
+      "idle_time": 17,
+      "top_speed": 6.0,
+      "up_acceleration": 0.74,
+      "down_acceleration": 0.74,
+      "avg_distance": 40,
+      "move_variation": 22
+    },
+    "stardewvalley:fish_blue_discus": {
+      "idle_time": 17,
+      "top_speed": 6.0,
+      "up_acceleration": 0.74,
+      "down_acceleration": 0.74,
+      "avg_distance": 40,
+      "move_variation": 22
+    },
+    "stardewvalley:fish_spook_fish": {
+      "idle_time": 17,
+      "top_speed": 6.0,
+      "up_acceleration": 0.74,
+      "down_acceleration": 0.74,
+      "avg_distance": 40,
+      "move_variation": 22
+    },
+    "stardewvalley:fish_mutant_carp": {
+      "idle_time": 6,
+      "top_speed": 8.0,
+      "up_acceleration": 0.92,
+      "down_acceleration": 0.92,
+      "avg_distance": 52,
+      "move_variation": 30
+    },
+    "stardewvalley:fish_radioactive_carp": {
+      "idle_time": 11,
+      "top_speed": 7.0,
+      "up_acceleration": 0.82,
+      "down_acceleration": 0.82,
+      "avg_distance": 45,
+      "move_variation": 26
+    },
+    "stardewvalley:fish_ice_pip": {
+      "idle_time": 9,
+      "top_speed": 7.2,
+      "up_acceleration": 0.84,
+      "down_acceleration": 0.84,
+      "avg_distance": 46,
+      "move_variation": 27
+    },
+    "stardewvalley:fish_scorpion_carp": {
+      "idle_time": 8,
+      "top_speed": 7.5,
+      "up_acceleration": 0.86,
+      "down_acceleration": 0.86,
+      "avg_distance": 47,
+      "move_variation": 28
+    },
+    "stardewvalley:fish_bullhead": {
+      "idle_time": 46,
+      "top_speed": 2.8,
+      "up_acceleration": 0.32,
+      "down_acceleration": 0.32,
+      "avg_distance": 53,
+      "move_variation": 7
+    },
+    "stardewvalley:fish_walleye": {
+      "idle_time": 42,
+      "top_speed": 3.2,
+      "up_acceleration": 0.36,
+      "down_acceleration": 0.36,
+      "avg_distance": 56,
+      "move_variation": 8
+    },
+    "stardewvalley:fish_shad": {
+      "idle_time": 42,
+      "top_speed": 3.2,
+      "up_acceleration": 0.36,
+      "down_acceleration": 0.36,
+      "avg_distance": 56,
+      "move_variation": 8
+    },
+    "stardewvalley:fish_lionfish": {
+      "idle_time": 40,
+      "top_speed": 3.5,
+      "up_acceleration": 0.38,
+      "down_acceleration": 0.38,
+      "avg_distance": 57,
+      "move_variation": 9
+    },
+    "stardewvalley:fish_red_mullet": {
+      "idle_time": 38,
+      "top_speed": 3.8,
+      "up_acceleration": 0.39,
+      "down_acceleration": 0.39,
+      "avg_distance": 58,
+      "move_variation": 9
+    },
+    "stardewvalley:fish_tuna": {
+      "idle_time": 32,
+      "top_speed": 4.5,
+      "up_acceleration": 0.45,
+      "down_acceleration": 0.45,
+      "avg_distance": 62,
+      "move_variation": 10
+    },
+    "stardewvalley:fish_eel": {
+      "idle_time": 32,
+      "top_speed": 4.5,
+      "up_acceleration": 0.45,
+      "down_acceleration": 0.45,
+      "avg_distance": 62,
+      "move_variation": 10
+    },
+    "stardewvalley:fish_angler": {
+      "idle_time": 20,
+      "top_speed": 6.5,
+      "up_acceleration": 0.58,
+      "down_acceleration": 0.58,
+      "avg_distance": 62,
+      "move_variation": 18
+    },
+    "stardewvalley:fish_ms._angler": {
+      "idle_time": 26,
+      "top_speed": 5.2,
+      "up_acceleration": 0.5,
+      "down_acceleration": 0.5,
+      "avg_distance": 66,
+      "move_variation": 11
+    },
+    "stardewvalley:fish_sea_cucumber": {
+      "idle_time": 41,
+      "top_speed": 3.7,
+      "up_acceleration": 0.32,
+      "down_acceleration": 0.7,
+      "avg_distance": 47,
+      "move_variation": 14
+    },
+    "stardewvalley:fish_flounder": {
+      "idle_time": 41,
+      "top_speed": 3.7,
+      "up_acceleration": 0.32,
+      "down_acceleration": 0.7,
+      "avg_distance": 47,
+      "move_variation": 14
+    },
+    "stardewvalley:fish_halibut": {
+      "idle_time": 41,
+      "top_speed": 3.7,
+      "up_acceleration": 0.32,
+      "down_acceleration": 0.7,
+      "avg_distance": 47,
+      "move_variation": 14
+    },
+    "stardewvalley:fish_midnight_squid": {
+      "idle_time": 35,
+      "top_speed": 4.5,
+      "up_acceleration": 0.36,
+      "down_acceleration": 0.78,
+      "avg_distance": 51,
+      "move_variation": 16
+    },
+    "stardewvalley:fish_stonefish": {
+      "idle_time": 32,
+      "top_speed": 5.1,
+      "up_acceleration": 0.4,
+      "down_acceleration": 0.82,
+      "avg_distance": 54,
+      "move_variation": 17
+    },
+    "stardewvalley:fish_squid": {
+      "idle_time": 28,
+      "top_speed": 5.6,
+      "up_acceleration": 0.43,
+      "down_acceleration": 0.88,
+      "avg_distance": 57,
+      "move_variation": 19
+    },
+    "stardewvalley:fish_super_cucumber": {
+      "idle_time": 27,
+      "top_speed": 5.9,
+      "up_acceleration": 0.44,
+      "down_acceleration": 0.9,
+      "avg_distance": 59,
+      "move_variation": 20
+    },
+    "stardewvalley:fish_stingray": {
+      "idle_time": 27,
+      "top_speed": 5.9,
+      "up_acceleration": 0.44,
+      "down_acceleration": 0.9,
+      "avg_distance": 59,
+      "move_variation": 20
+    },
+    "stardewvalley:fish_octopus": {
+      "idle_time": 21,
+      "top_speed": 6.7,
+      "up_acceleration": 0.49,
+      "down_acceleration": 0.98,
+      "avg_distance": 63,
+      "move_variation": 22
+    },
+    "stardewvalley:fish_blobfish": {
+      "idle_time": 28,
+      "top_speed": 5.6,
+      "up_acceleration": 0.88,
+      "down_acceleration": 0.43,
+      "avg_distance": 57,
+      "move_variation": 19
+    },
+    "stardewvalley:fish_pufferfish": {
+      "idle_time": 27,
+      "top_speed": 5.9,
+      "up_acceleration": 0.9,
+      "down_acceleration": 0.44,
+      "avg_distance": 59,
+      "move_variation": 20
+    }
+  },
+  "defaultBehavior": {
+    "idle_time": 25,
+    "top_speed": 5.0,
+    "up_acceleration": 0.4,
+    "down_acceleration": 0.4,
+    "avg_distance": 50,
+    "move_variation": 15
+  }
+}

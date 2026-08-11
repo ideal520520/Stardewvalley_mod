@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:bug_meat"
+  ],
+  "result": {
+    "id": "stardewvalley:bait_bait",
+    "count": 5
+  }
+}

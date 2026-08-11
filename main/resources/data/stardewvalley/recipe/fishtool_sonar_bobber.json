@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "stardewvalley:iron_bar",
+    "stardewvalley:refined_quartz",
+    "stardewvalley:refined_quartz"
+  ],
+  "result": {
+    "id": "stardewvalley:fishtool_sonar_bobber",
+    "count": 1
+  }
+}

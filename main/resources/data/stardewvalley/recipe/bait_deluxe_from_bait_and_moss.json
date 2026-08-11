@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:bait_bait",
+    "stardewvalley:bait_bait",
+    "stardewvalley:bait_bait",
+    "stardewvalley:bait_bait",
+    "stardewvalley:bait_bait",
+    "stardewvalley:moss",
+    "stardewvalley:moss"
+  ],
+  "result": {
+    "id": "stardewvalley:bait_deluxe_bait",
+    "count": 5
+  }
+}

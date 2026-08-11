@@ -1,0 +1,28 @@
+{
+	"variants": {
+		"age=0": {
+			"model": "stardewvalley:block/crop/amaranth/stage1"
+		},
+		"age=1": {
+			"model": "stardewvalley:block/crop/amaranth/stage2"
+		},
+		"age=2": {
+			"model": "stardewvalley:block/crop/amaranth/stage2"
+		},
+		"age=3": {
+			"model": "stardewvalley:block/crop/amaranth/stage3"
+		},
+		"age=4": {
+			"model": "stardewvalley:block/crop/amaranth/stage3"
+		},
+		"age=5": {
+			"model": "stardewvalley:block/crop/amaranth/stage4"
+		},
+		"age=6": {
+			"model": "stardewvalley:block/crop/amaranth/stage4"
+		},
+		"age=7": {
+			"model": "stardewvalley:block/crop/amaranth/harvest"
+		}
+	}
+}

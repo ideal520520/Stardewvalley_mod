@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:wood",
+    "stardewvalley:caiji_sap",
+    "stardewvalley:caiji_sap"
+  ],
+  "result": {
+    "id": "minecraft:torch",
+    "count": 1
+  }
+}

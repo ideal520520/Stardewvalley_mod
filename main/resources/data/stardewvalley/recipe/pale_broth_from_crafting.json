@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:fish_white_algae",
+    "stardewvalley:fish_white_algae"
+  ],
+  "result": {
+    "id": "stardewvalley:pale_broth",
+    "count": 1
+  }
+}

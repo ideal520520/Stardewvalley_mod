@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:caiji_cavecarrot",
+    "#stardewvalley:caiji_commonmushroom",
+    "#stardewvalley:kale",
+    "stardewvalley:oil"
+  ],
+  "result": {
+    "id": "stardewvalley:stir_fry",
+    "count": 1
+  }
+}

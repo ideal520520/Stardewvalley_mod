@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:fish_snail",
+    "stardewvalley:garlic"
+  ],
+  "result": {
+    "id": "stardewvalley:escargot",
+    "count": 1
+  }
+}

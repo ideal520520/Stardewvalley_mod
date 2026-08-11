@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:tomato",
+    "#stardewvalley:fish_shrimp",
+    "stardewvalley:caiji_wildhorseradish"
+  ],
+  "result": {
+    "id": "stardewvalley:shrimp_cocktail",
+    "count": 1
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:caiji_ginger",
+    "#stardewvalley:caiji_ginger",
+    "#stardewvalley:caiji_ginger",
+    "stardewvalley:sugar"
+  ],
+  "result": {
+    "id": "stardewvalley:ginger_ale",
+    "count": 1
+  }
+}

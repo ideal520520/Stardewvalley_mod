@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:rhubarb",
+    "stardewvalley:wheat_flour",
+    "stardewvalley:sugar"
+  ],
+  "result": {
+    "id": "stardewvalley:rhubarb_pie",
+    "count": 1
+  }
+}

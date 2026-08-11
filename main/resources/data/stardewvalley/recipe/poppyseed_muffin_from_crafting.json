@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:poppy",
+    "stardewvalley:wheat_flour",
+    "stardewvalley:sugar"
+  ],
+  "result": {
+    "id": "stardewvalley:poppyseed_muffin",
+    "count": 1
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:taroroot",
+    "#stardewvalley:taroroot",
+    "#stardewvalley:taroroot",
+    "#stardewvalley:taroroot"
+  ],
+  "result": {
+    "id": "stardewvalley:poi",
+    "count": 1
+  }
+}

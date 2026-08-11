@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:iron_bar",
+    "stardewvalley:coal",
+    "stardewvalley:coal"
+  ],
+  "result": {
+    "id": "stardewvalley:explosive_ammo",
+    "count": 5
+  }
+}

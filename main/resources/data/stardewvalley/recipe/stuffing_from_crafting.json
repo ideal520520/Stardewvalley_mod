@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:bread",
+    "#stardewvalley:cranberries",
+    "#stardewvalley:caiji_hazelnut"
+  ],
+  "result": {
+    "id": "stardewvalley:stuffing",
+    "count": 1
+  }
+}

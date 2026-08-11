@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " I",
+    "IC"
+  ],
+  "key": {
+    "I": "stardewvalley:iron_bar",
+    "C": "stardewvalley:cloth"
+  },
+  "result": {
+    "id": "stardewvalley:fishtool_dressed_spinner",
+    "count": 1
+  }
+}

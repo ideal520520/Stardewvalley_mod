@@ -1,0 +1,52 @@
+{
+	"required": true,
+	"package": "stardewvalley.modid.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"BiomeWeatherMixin",
+		"BombDamageMixin",
+		"BombExplosionDropsMixin",
+		"BombItemInvulnerabilityMixin",
+		"BookHorseSpeedMixin",
+		"BookMonsterCompendiumMixin",
+		"ChickenEggMixin",
+		"DefenseMixin",
+		"ExampleMixin",
+		"FishingBiteMixin",
+		"FishingBobberCatchMixin",
+		"FishingBobberMixin",
+		"FishingHookTimeMixin",
+		"HoeExhaustionMixin",
+		"LeaveSapMixin",
+		"MonsterDropsMixin",
+		"PigTruffleMixin",
+		"PlayerAttackMixin",
+		"PlayerTickMixin",
+		"RabbitFootMixin",
+		"RingMixin",
+		"SafetyManualDamageMixin",
+		"SleepHealMixin",
+		"SlimeSpawnMixin",
+		"SpawnCapMixin",
+		"StackableDataComponentMixin",
+		"StackableInventoryMixin",
+		"StackableItemStackMixin",
+		"StardewFishingHookMixin",
+		"ToolNoDamageMixin",
+		"WorldTickMixin"
+	],
+	"client": [
+		"BookPriceCatalogueMixin",
+		"ExhaustedSprintMixin",
+		"InventoryScreenClickMixin",
+		"InventoryScreenMixin",
+		"RecipeBookScreenAccessor",
+		"StatusEffectDisplayMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

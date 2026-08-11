@@ -1,0 +1,112 @@
+{
+	"variants": {
+		"age=0": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage1"
+		},
+		"age=1": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage1"
+		},
+		"age=2": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage2"
+		},
+		"age=3": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage2"
+		},
+		"age=4": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage2"
+		},
+		"age=5": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage2"
+		},
+		"age=6": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage2"
+		},
+		"age=7": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage2"
+		},
+		"age=8": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage2"
+		},
+		"age=9": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage3"
+		},
+		"age=10": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage3"
+		},
+		"age=11": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage3"
+		},
+		"age=12": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage3"
+		},
+		"age=13": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage3"
+		},
+		"age=14": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage3"
+		},
+		"age=15": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage3"
+		},
+		"age=16": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage4"
+		},
+		"age=17": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage4"
+		},
+		"age=18": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage4"
+		},
+		"age=19": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage4"
+		},
+		"age=20": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage4"
+		},
+		"age=21": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage4"
+		},
+		"age=22": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage4"
+		},
+		"age=23": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage5"
+		},
+		"age=24": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage5"
+		},
+		"age=25": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage5"
+		},
+		"age=26": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage5"
+		},
+		"age=27": {
+			"model": "stardewvalley:block/crop/ancientfruit/stage5"
+		},
+		"age=28": {
+			"model": "stardewvalley:block/crop/ancientfruit/harvest"
+		},
+		"age=29": {
+			"model": "stardewvalley:block/crop/ancientfruit/afterharvest"
+		},
+		"age=30": {
+			"model": "stardewvalley:block/crop/ancientfruit/afterharvest"
+		},
+		"age=31": {
+			"model": "stardewvalley:block/crop/ancientfruit/afterharvest"
+		},
+		"age=32": {
+			"model": "stardewvalley:block/crop/ancientfruit/afterharvest"
+		},
+		"age=33": {
+			"model": "stardewvalley:block/crop/ancientfruit/afterharvest"
+		},
+		"age=34": {
+			"model": "stardewvalley:block/crop/ancientfruit/afterharvest"
+		},
+		"age=35": {
+			"model": "stardewvalley:block/crop/ancientfruit/afterharvest"
+		}
+	}
+}

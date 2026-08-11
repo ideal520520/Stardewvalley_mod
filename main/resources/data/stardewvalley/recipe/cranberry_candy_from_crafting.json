@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:cranberries",
+    "#stardewvalley:apple",
+    "stardewvalley:sugar"
+  ],
+  "result": {
+    "id": "stardewvalley:cranberry_candy",
+    "count": 1
+  }
+}

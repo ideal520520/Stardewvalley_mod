@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "done=false": {
+      "model": "stardewvalley:block/mushroom_log"
+    },
+    "done=true": {
+      "model": "stardewvalley:block/mushroom_log"
+    }
+  }
+}

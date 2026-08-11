@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:caiji_wildhorseradish",
+    "#stardewvalley:caiji_daffodil",
+    "#stardewvalley:caiji_leek",
+    "#stardewvalley:caiji_dandelion"
+  ],
+  "result": {
+    "id": "stardewvalley:spring_seeds",
+    "count": 10
+  }
+}

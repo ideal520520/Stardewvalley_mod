@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:wheat_flour",
+    "#stardewvalley:fish_periwinkle",
+    "stardewvalley:void_mayonnaise"
+  ],
+  "result": {
+    "id": "stardewvalley:strange_bun",
+    "count": 1
+  }
+}

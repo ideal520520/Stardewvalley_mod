@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:caiji_coconut",
+    "#stardewvalley:pineapple",
+    "#stardewvalley:hotpepper"
+  ],
+  "result": {
+    "id": "stardewvalley:tropical_curry",
+    "count": 1
+  }
+}

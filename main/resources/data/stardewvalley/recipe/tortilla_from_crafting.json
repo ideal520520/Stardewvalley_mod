@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:corn"
+  ],
+  "result": {
+    "id": "stardewvalley:tortilla",
+    "count": 1
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:caiji_winterroot",
+    "#stardewvalley:caiji_crystalfruit",
+    "#stardewvalley:caiji_snowyam",
+    "#stardewvalley:caiji_crocus"
+  ],
+  "result": {
+    "id": "stardewvalley:winter_seeds",
+    "count": 10
+  }
+}

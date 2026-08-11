@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:caiji_leek",
+    "#stardewvalley:caiji_dandelion",
+    "stardewvalley:vinegar"
+  ],
+  "result": {
+    "id": "stardewvalley:salad",
+    "count": 1
+  }
+}

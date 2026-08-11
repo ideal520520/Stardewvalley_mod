@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:caiji_sap",
+    "stardewvalley:caiji_sap",
+    "stardewvalley:caiji_sap",
+    "stardewvalley:caiji_sap",
+    "#stardewvalley:fishes"
+  ],
+  "result": {
+    "id": "stardewvalley:quality_fertilizer",
+    "count": 2
+  }
+}

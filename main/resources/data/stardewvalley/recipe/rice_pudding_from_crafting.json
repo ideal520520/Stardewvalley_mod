@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:milk", "stardewvalley:sugar",
+    "stardewvalley:rice"
+  ],
+  "result": {
+    "id": "stardewvalley:rice_pudding",
+    "count": 1
+  }
+}

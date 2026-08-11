@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:omelet",
+    "#stardewvalley:parsnip"
+  ],
+  "result": {
+    "id": "stardewvalley:farmers_lunch",
+    "count": 1
+  }
+}

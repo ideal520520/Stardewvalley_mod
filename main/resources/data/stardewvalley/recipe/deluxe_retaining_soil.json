@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:misc_stone",
+    "stardewvalley:misc_stone",
+    "stardewvalley:misc_stone",
+    "stardewvalley:misc_stone",
+    "stardewvalley:misc_stone",
+    "#stardewvalley:fiber",
+    "#stardewvalley:fiber",
+    "#stardewvalley:fiber",
+    "stardewvalley:clay"
+  ],
+  "result": {
+    "id": "stardewvalley:deluxe_retaining_soil",
+    "count": 2
+  }
+}

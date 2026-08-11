@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:copper_bar",
+    "stardewvalley:iron_bar"
+  ],
+  "result": {
+    "id": "stardewvalley:sprinkler",
+    "count": 1
+  }
+}

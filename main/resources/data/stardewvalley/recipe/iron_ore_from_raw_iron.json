@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:raw_iron"
+  ],
+  "result": {
+    "id": "stardewvalley:iron_ore",
+    "count": 1
+  }
+}

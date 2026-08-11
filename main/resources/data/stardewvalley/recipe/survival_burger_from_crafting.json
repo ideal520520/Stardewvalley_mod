@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:bread",
+    "#stardewvalley:caiji_cavecarrot",
+    "#stardewvalley:eggplant"
+  ],
+  "result": {
+    "id": "stardewvalley:survival_burger",
+    "count": 1
+  }
+}

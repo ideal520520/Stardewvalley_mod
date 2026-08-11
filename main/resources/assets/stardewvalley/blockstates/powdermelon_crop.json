@@ -1,0 +1,28 @@
+{
+	"variants": {
+		"age=0": {
+			"model": "stardewvalley:block/crop/powdermelon/stage1"
+		},
+		"age=1": {
+			"model": "stardewvalley:block/crop/powdermelon/stage2"
+		},
+		"age=2": {
+			"model": "stardewvalley:block/crop/powdermelon/stage2"
+		},
+		"age=3": {
+			"model": "stardewvalley:block/crop/powdermelon/stage3"
+		},
+		"age=4": {
+			"model": "stardewvalley:block/crop/powdermelon/stage4"
+		},
+		"age=5": {
+			"model": "stardewvalley:block/crop/powdermelon/stage4"
+		},
+		"age=6": {
+			"model": "stardewvalley:block/crop/powdermelon/stage5"
+		},
+		"age=7": {
+			"model": "stardewvalley:block/crop/powdermelon/harvest"
+		}
+	}
+}

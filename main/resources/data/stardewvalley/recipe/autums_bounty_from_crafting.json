@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stardewvalley:yam",
+    "#stardewvalley:pumpkin"
+  ],
+  "result": {
+    "id": "stardewvalley:autums_bounty",
+    "count": 1
+  }
+}

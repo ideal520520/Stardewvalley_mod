@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stardewvalley:gold_bar",
+    "stardewvalley:iridium_bar",
+    "stardewvalley:battery_pack"
+  ],
+  "result": {
+    "id": "stardewvalley:iridium_sprinkler",
+    "count": 1
+  }
+}
