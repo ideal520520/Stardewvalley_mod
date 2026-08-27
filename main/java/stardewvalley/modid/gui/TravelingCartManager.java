@@ -105,7 +105,8 @@ public class TravelingCartManager extends PersistentState {
     );
 
     public static TravelingCartManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public List<ModPayloads.TravelingCartItem> getCurrentStock() {

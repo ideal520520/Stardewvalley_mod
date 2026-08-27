@@ -56,7 +56,8 @@ public class ForagingLevelManager extends PersistentState {
     );
 
     public static ForagingLevelManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public int getLevel(UUID playerUuid) {

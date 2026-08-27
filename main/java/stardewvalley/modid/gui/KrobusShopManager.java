@@ -253,7 +253,8 @@ public class KrobusShopManager extends PersistentState {
     );
 
     public static KrobusShopManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     /** 每天调用，重置购买记录 */

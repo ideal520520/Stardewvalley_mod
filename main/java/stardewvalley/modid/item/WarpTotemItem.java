@@ -12,11 +12,15 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import stardewvalley.modid.StardewValley;
 import stardewvalley.modid.block.ModBlocks;
 import stardewvalley.modid.block.TotemPoleBlockEntity;
 import stardewvalley.modid.gui.ModPayloads;
+
+import java.util.UUID;
 
 public class WarpTotemItem extends Item {
 
@@ -46,7 +50,7 @@ public class WarpTotemItem extends Item {
 
         if (user.isSneaking()) {
             // Shift+右键：保存坐标（不消耗物品）
-            warpState.setPosition(user.getUuid(), totemType, user.getX(), user.getY(), user.getZ());
+            warpState.setPosition(serverWorld.getRegistryKey(), user.getUuid(), totemType, user.getX(), user.getY(), user.getZ());
 
             BlockPos newPos = BlockPos.ofFloored(user.getX(), user.getY(), user.getZ());
             Long oldPosLong = warpState.getAndSetDisplayPos(user.getUuid(), totemType, newPos.asLong());
@@ -69,6 +73,9 @@ public class WarpTotemItem extends Item {
             // 右键：传送（消耗1个物品）
             WarpPositionState.WarpData data = warpState.getPosition(user.getUuid(), totemType);
             if (data == null) {
+                data = findWarpInOtherWorlds(serverWorld, user.getUuid(), totemType);
+            }
+            if (data == null) {
                 return ActionResult.SUCCESS;
             }
 
@@ -79,6 +86,8 @@ public class WarpTotemItem extends Item {
             user.getItemCooldownManager().set(stack, TELEPORT_COOLDOWN);
 
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) user;
+            ServerWorld resolvedTarget = serverWorld.getServer().getWorld(data.dimension());
+            final ServerWorld targetWorld = resolvedTarget != null ? resolvedTarget : serverWorld;
             double tx = data.x(), ty = data.y(), tz = data.z();
             float yaw = user.getYaw(), pitch = user.getPitch();
             new Thread(() -> {
@@ -88,8 +97,10 @@ public class WarpTotemItem extends Item {
                     Thread.currentThread().interrupt();
                     return;
                 }
-                serverWorld.getServer().execute(() ->
-                    serverPlayer.networkHandler.requestTeleport(tx, ty, tz, yaw, pitch));
+                serverWorld.getServer().execute(() -> {
+                    TeleportTarget target = new TeleportTarget(targetWorld, new Vec3d(tx, ty, tz), serverPlayer.getVelocity(), yaw, pitch, TeleportTarget.NO_OP);
+                    serverPlayer.teleportTo(target);
+                });
             }).start();
         }
 
@@ -111,5 +122,14 @@ public class WarpTotemItem extends Item {
             String itemId = StardewValley.MOD_ID + ":warp_totem_" + totemType;
             ServerPlayNetworking.send(serverPlayer, new ModPayloads.FloatingItemS2CPayload(itemId));
         }
+    }
+
+    private WarpPositionState.WarpData findWarpInOtherWorlds(ServerWorld currentWorld, UUID playerUuid, String totemType) {
+        for (ServerWorld world : currentWorld.getServer().getWorlds()) {
+            if (world == currentWorld) continue;
+            WarpPositionState.WarpData data = WarpPositionState.get(world).getPosition(playerUuid, totemType);
+            if (data != null) return data;
+        }
+        return null;
     }
 }

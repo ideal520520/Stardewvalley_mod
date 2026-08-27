@@ -49,7 +49,8 @@ public class GoldenAnimalCrackerManager extends PersistentState {
     );
 
     public static GoldenAnimalCrackerManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     /** 标记动物为已喂食金色动物饼干 */

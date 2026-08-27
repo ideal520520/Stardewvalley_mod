@@ -139,7 +139,8 @@ public class SkillDataManager extends PersistentState {
     );
 
     public static SkillDataManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public PlayerSkillData getOrCreate(UUID playerUuid) {

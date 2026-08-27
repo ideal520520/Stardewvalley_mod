@@ -52,7 +52,8 @@ public class TrashCanStateManager extends PersistentState {
     );
 
     public static TrashCanStateManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public int getLevel() { return level; }

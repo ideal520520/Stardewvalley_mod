@@ -42,7 +42,8 @@ public class ChickenBindingManager extends PersistentState {
     );
 
     public static ChickenBindingManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     /** 如果喂食者有鸡舍大师天赋，标记这只鸡为受鸡舍大师喂食 */

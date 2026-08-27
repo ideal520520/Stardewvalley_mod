@@ -116,7 +116,8 @@ public class BundleManager extends PersistentState {
     // ===== 静态获取实例 =====
 
     public static BundleManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     // ===== Bundle 数据定义 =====

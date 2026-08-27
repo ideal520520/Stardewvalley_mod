@@ -74,7 +74,8 @@ public class LuckManager extends PersistentState {
     );
 
     public static LuckManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     /** 获取当天所有玩家共享的运气值，若未刷新则重新随机生成 */

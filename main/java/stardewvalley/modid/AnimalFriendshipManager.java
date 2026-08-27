@@ -50,7 +50,8 @@ public class AnimalFriendshipManager extends PersistentState {
     );
 
     public static AnimalFriendshipManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     /** 喂食动物，增加好感度（不超过1000），记录今天的喂食 */

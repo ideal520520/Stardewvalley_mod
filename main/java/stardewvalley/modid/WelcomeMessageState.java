@@ -55,7 +55,8 @@ public class WelcomeMessageState extends PersistentState {
     );
 
     public static WelcomeMessageState get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public boolean isDisabled(UUID playerUuid) {

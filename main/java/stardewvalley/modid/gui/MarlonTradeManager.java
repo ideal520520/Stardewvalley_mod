@@ -42,7 +42,8 @@ public class MarlonTradeManager extends PersistentState {
     }
 
     public static MarlonTradeManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public boolean hasTraded(UUID playerUuid) {

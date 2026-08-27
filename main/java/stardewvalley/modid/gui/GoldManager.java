@@ -79,7 +79,8 @@ public class GoldManager extends PersistentState {
     );
 
     public static GoldManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public int getGold() {

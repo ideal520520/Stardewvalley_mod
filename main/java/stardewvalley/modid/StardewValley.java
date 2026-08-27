@@ -121,7 +121,6 @@ public class StardewValley implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	private static final Map<RegistryKey<World>, Long> LAST_DAY = new HashMap<>();
-	private static final Set<UUID> INITIAL_ITEMS_GIVEN = new HashSet<>();
 	private static final Set<BlockPos> BREAKING_GRASS = new HashSet<>();
 
 	@Override
@@ -163,6 +162,7 @@ public class StardewValley implements ModInitializer {
 		registerGrassEvents();
 		registerIridiumScytheCropHarvest();
 		registerCombatEvents();
+		registerCooldownOnUse();
 		registerChickenFeeding();
 		registerEquipmentHandler();
 		registerTrashCanHandler();
@@ -3017,10 +3017,12 @@ public class StardewValley implements ModInitializer {
 							player.getInventory().offerOrDrop(new ItemStack(guideBook));
 						}
 
-						// 作物（种子与作物）只能领取一次
-						boolean firstTime = !INITIAL_ITEMS_GIVEN.contains(uuid);
+						// 作物（种子与作物）只能领取一次（持久化，跨维度共享）
+						ServerWorld world = (ServerWorld) player.getEntityWorld();
+						InitialItemState initialState = InitialItemState.get(world);
+						boolean firstTime = !initialState.hasClaimed(uuid);
 						if (firstTime) {
-							INITIAL_ITEMS_GIVEN.add(uuid);
+							initialState.markClaimed(uuid);
 							Item seedItem = Registries.ITEM.get(Identifier.of(MOD_ID, "parsnip_seeds"));
 							if (seedItem != null) {
 								player.getInventory().offerOrDrop(new ItemStack(seedItem, 15));
@@ -3600,6 +3602,39 @@ public class StardewValley implements ModInitializer {
 			ServerWorld world = (ServerWorld) player.getEntityWorld();
 			CombatLevelManager.get(world).applyHealthBonus(player);
 		});
+	}
+
+	private void registerCooldownOnUse() {
+		// 冷却期间尝试使用物品时，把剩余冷却重新同步给客户端（修复跨维度后冷却条丢失）
+		net.fabricmc.fabric.api.event.player.UseItemCallback.EVENT.register((player, world, hand) -> {
+			if (world.isClient()) return ActionResult.PASS;
+			if (player instanceof ServerPlayerEntity serverPlayer) {
+				net.minecraft.item.ItemStack stack = player.getStackInHand(hand);
+				if (serverPlayer.getItemCooldownManager().isCoolingDown(stack)) {
+					Integer remaining = getCooldownRemaining(serverPlayer, stack);
+					LOGGER.info("[CooldownSync] {} 冷却中尝试使用 {}，剩余 {} tick", serverPlayer.getName().getString(), stack.getItem(), remaining);
+					if (remaining != null && remaining > 0) {
+						Identifier group = serverPlayer.getItemCooldownManager().getGroup(stack);
+						if (group != null) {
+							serverPlayer.networkHandler.sendPacket(new net.minecraft.network.packet.s2c.play.CooldownUpdateS2CPacket(group, remaining));
+						}
+					}
+				}
+			}
+			return ActionResult.PASS;
+		});
+	}
+
+	private Integer getCooldownRemaining(ServerPlayerEntity player, net.minecraft.item.ItemStack stack) {
+		net.minecraft.entity.player.ItemCooldownManager manager = player.getItemCooldownManager();
+		Identifier group = manager.getGroup(stack);
+		if (group == null) return null;
+		java.util.Map<Identifier, ?> entries = ((stardewvalley.modid.mixin.ItemCooldownManagerAccessor) manager).getEntries();
+		Object entry = entries.get(group);
+		if (entry == null) return null;
+		int tick = ((stardewvalley.modid.mixin.ItemCooldownManagerAccessor) manager).getTick();
+		int endTick = ((stardewvalley.modid.mixin.ItemCooldownEntryAccessor) entry).getEndTick();
+		return endTick - tick;
 	}
 
 	private void registerWelcomeMessage() {

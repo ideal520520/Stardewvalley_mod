@@ -136,6 +136,7 @@ public class BookStoreManager extends PersistentState {
     );
 
     public static BookStoreManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 }

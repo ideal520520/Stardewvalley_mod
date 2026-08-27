@@ -98,7 +98,8 @@ public class EquipmentStateManager extends PersistentState {
     );
 
     public static EquipmentStateManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     /** 获取玩家装备栏数据，不存在则返回新的空实例 */

@@ -17,6 +17,8 @@
 		"FishingBobberMixin",
 		"FishingHookTimeMixin",
 		"HoeExhaustionMixin",
+		"ItemCooldownEntryAccessor",
+		"ItemCooldownManagerAccessor",
 		"LeaveSapMixin",
 		"MonsterDropsMixin",
 		"PigTruffleMixin",

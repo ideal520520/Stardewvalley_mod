@@ -65,7 +65,8 @@ public class MasteryManager extends PersistentState {
     );
 
     public static MasteryManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     // ===== 精通点数计算 =====

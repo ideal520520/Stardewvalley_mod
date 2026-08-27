@@ -3,10 +3,13 @@ package stardewvalley.modid.item;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.datafixer.DataFixTypes;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateType;
+import net.minecraft.world.World;
 
 import stardewvalley.modid.util.SafeCodec;
 
@@ -22,15 +25,16 @@ public class WarpPositionState extends PersistentState {
     // 追踪每个玩家每种图腾展示方块的位置，用于设置新位置时清除旧的
     private final Map<UUID, Map<String, Long>> totemDisplayPositions = new HashMap<>();
 
-    public record WarpData(double x, double y, double z) {}
+    public record WarpData(RegistryKey<World> dimension, double x, double y, double z) {}
 
-    private record Entry(String uuid, String totemType, double x, double y, double z) {}
+    private record Entry(String uuid, String totemType, RegistryKey<World> dimension, double x, double y, double z) {}
     private record DisplayEntry(String uuid, String totemType, long pos) {}
 
     private static final Codec<Entry> ENTRY_CODEC = RecordCodecBuilder.create(instance ->
         instance.group(
             Codec.STRING.fieldOf("uuid").forGetter(Entry::uuid),
             Codec.STRING.fieldOf("totemType").forGetter(Entry::totemType),
+            RegistryKey.createCodec(RegistryKeys.WORLD).fieldOf("dimension").forGetter(Entry::dimension),
             Codec.DOUBLE.fieldOf("x").forGetter(Entry::x),
             Codec.DOUBLE.fieldOf("y").forGetter(Entry::y),
             Codec.DOUBLE.fieldOf("z").forGetter(Entry::z)
@@ -59,7 +63,7 @@ public class WarpPositionState extends PersistentState {
             for (Entry e : data.warps()) {
                 state.playerWarps
                     .computeIfAbsent(UUID.fromString(e.uuid()), k -> new HashMap<>())
-                    .put(e.totemType(), new WarpData(e.x(), e.y(), e.z()));
+                    .put(e.totemType(), new WarpData(e.dimension(), e.x(), e.y(), e.z()));
             }
             for (DisplayEntry d : data.displays()) {
                 state.totemDisplayPositions
@@ -74,6 +78,7 @@ public class WarpPositionState extends PersistentState {
                     .map(warpEntry -> new Entry(
                         uuidEntry.getKey().toString(),
                         warpEntry.getKey(),
+                        warpEntry.getValue().dimension(),
                         warpEntry.getValue().x(),
                         warpEntry.getValue().y(),
                         warpEntry.getValue().z())))
@@ -100,9 +105,9 @@ public class WarpPositionState extends PersistentState {
         return world.getPersistentStateManager().getOrCreate(TYPE);
     }
 
-    public void setPosition(UUID playerUuid, String totemType, double x, double y, double z) {
+    public void setPosition(RegistryKey<World> dimension, UUID playerUuid, String totemType, double x, double y, double z) {
         playerWarps.computeIfAbsent(playerUuid, k -> new HashMap<>())
-            .put(totemType, new WarpData(x, y, z));
+            .put(totemType, new WarpData(dimension, x, y, z));
         setDirty(true);
     }
 

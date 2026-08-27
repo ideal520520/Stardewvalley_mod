@@ -45,6 +45,7 @@ public class WeatherState extends PersistentState {
     );
 
     public static WeatherState get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 }

@@ -42,7 +42,8 @@ public class DwarvishSafetyManager extends PersistentState {
     }
 
     public static DwarvishSafetyManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public boolean isActivated(UUID playerUuid) {

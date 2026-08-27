@@ -99,7 +99,8 @@ public class OreToolUpgradeManager extends PersistentState {
     private final transient Set<UUID> completionNotified = new HashSet<>();
 
     public static OreToolUpgradeManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public boolean hasUpgradeInProgress(UUID playerUuid) {

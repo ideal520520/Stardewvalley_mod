@@ -228,7 +228,8 @@ public class MuseumManager extends PersistentState {
     // ===== 静态获取实例 =====
 
     public static MuseumManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     // ===== 为同步构造数据 =====

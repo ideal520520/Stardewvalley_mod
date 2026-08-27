@@ -72,7 +72,8 @@ public class BookDataManager extends PersistentState {
     }
 
     public static BookDataManager get(ServerWorld world) {
-        return world.getPersistentStateManager().getOrCreate(TYPE);
+        ServerWorld overworld = world.getServer().getOverworld();
+        return overworld.getPersistentStateManager().getOrCreate(TYPE);
     }
 
     public boolean hasUsedBook(UUID playerUuid, String bookId) {
