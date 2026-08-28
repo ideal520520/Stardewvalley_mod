@@ -14,6 +14,7 @@ public class GuideBookScreen extends Screen {
     private static final int TOP_OFFSET = 20;
     private static final int CATEGORY_GAP = 22;
     private static final int SKILL_CATEGORY_INDEX = 15;
+    private static final int FISH_CATEGORY_INDEX = 6;
 
     private int selectedCategory = 0;
     private int scrollOffset = 0;
@@ -134,7 +135,78 @@ public class GuideBookScreen extends Screen {
             "§7- 宝藏猎人：钓鱼宝藏概率提升\n" +
             "§7- 声呐浮标：显示鱼的位置\n\n" +
             "§7不同点：鱼王在本mod可多次钓上（通过装载挑战鱼饵和对应鱼王的针对性鱼饵），但目前没有写钓上二代鱼王的功能。\n\n" +
-            "§7在此感谢kltyton的开源代码对该功能的实现的极大贡献。"
+            "§7在此感谢kltyton的开源代码对该功能的实现的极大贡献。\n\n" +
+            "§l——全部鱼类上钩条件——\n" +
+            "§7（季节 | 时间 | 天气 | 地点）\n" +
+            "§l群系说明：\n" +
+            "§e海洋§7=暖水海洋/温水海洋/海洋/冷水海洋/冰冻海洋/深温水海洋/深海/深冷水海洋/深冰冻海洋/蘑菇岛\n" +
+            "§e内陆§7=排除海洋/洞穴/干旱外的全部群系：沼泽/红树林沼泽/河流/冰冻河流/沙滩/积雪沙滩/石岸/针叶林/积雪针叶林/原始松木针叶林/原始云杉针叶林/雪原/冰刺之地/冰封山峰/森林/繁花森林/白桦林/原始白桦林/黑森林/风袭森林/丛林/竹林/稀疏丛林/樱花树林/平原/向日葵平原/草甸/风袭丘陵/风袭砾质丘陵/裸岩山峰/尖峭山峰/积雪山坡/雪林/下界荒地/玄武岩三角洲/灵魂沙峡谷/绯红森林/诡异森林/末地/末地小岛/末地内陆/末地高地/末地荒地\n" +
+            "§e洞穴§7=滴水石洞/繁茂洞穴/深暗之域\n" +
+            "§e森林§7=森林/繁花森林/白桦林/原始白桦林/黑森林/风袭森林/丛林/竹林/稀疏丛林/樱花树林\n" +
+            "§e沼泽§7=沼泽/红树林沼泽\n" +
+            "§e针叶林系§7=针叶林/积雪针叶林/原始松木针叶林/原始云杉针叶林\n" +
+            "§e冰雪§7=冷水海洋/深冷水海洋/冰冻海洋/深冰冻海洋/雪原/冰刺之地/积雪沙滩/冰冻河流/针叶林系（针叶林/积雪针叶林/原始松木针叶林/原始云杉针叶林）\n" +
+            "§e沙漠/恶地§7=沙漠/恶地/风蚀恶地/繁茂恶地\n" +
+            "§e热带§7=热带草原/热带高原/风袭热带草原/丛林/竹林/稀疏丛林\n" +
+            "§e暖洋§7=暖水海洋/温水海洋/深温水海洋\n" +
+            "§e下界§7=下界荒地/玄武岩三角洲/灵魂沙峡谷/绯红森林/诡异森林\n\n" +
+            "§b河豚§7：夏 | 12:00~16:00 | 晴 | 海洋\n" +
+            "§b鳀鱼§7：春秋 | 6:00~19:00 | 任意 | 海洋\n" +
+            "§b金枪鱼§7：夏冬 | 6:00~19:00 | 任意 | 海洋\n" +
+            "§b沙丁鱼§7：春夏秋 | 6:00~19:00 | 任意 | 海洋\n" +
+            "§b大头鱼§7：全年 | 18:00~次日2:00 | 任意 | 内陆\n" +
+            "§b大嘴鲈鱼§7：全年 | 6:00~19:00 | 任意 | 森林\n" +
+            "§b小嘴鲈鱼§7：春秋 | 6:00~19:00 | 任意 | 内陆\n" +
+            "§b虹鳟鱼§7：夏 | 6:00~19:00 | 晴 | 内陆\n" +
+            "§b鲑鱼§7：秋 | 6:00~19:00 | 任意 | 内陆\n" +
+            "§b大眼鱼§7：秋冬 | 12:00~次日2:00 | 雨 | 内陆\n" +
+            "§b河鲈§7：冬 | 全天 | 任意 | 内陆\n" +
+            "§b鲤鱼§7：全年 | 全天 | 任意 | 内陆\n" +
+            "§b鲶鱼§7：春秋 | 6:00~次日0:00 | 雨 | 内陆\n" +
+            "§b狗鱼§7：夏冬 | 全天 | 任意 | 内陆\n" +
+            "§b太阳鱼§7：春夏 | 6:00~19:00 | 晴 | 内陆\n" +
+            "§b红鲻鱼§7：夏冬 | 6:00~19:00 | 任意 | 海洋\n" +
+            "§b鲱鱼§7：春冬 | 全天 | 任意 | 海洋\n" +
+            "§b鳗鱼§7：春秋 | 16:00~次日2:00 | 雨 | 海洋\n" +
+            "§b章鱼§7：夏 | 6:00~13:00 | 任意 | 海洋\n" +
+            "§b红鲷鱼§7：春夏秋 | 6:00~19:00 | 雨 | 海洋\n" +
+            "§b鱿鱼§7：冬 | 18:00~次日2:00 | 任意 | 海洋\n" +
+            "§b海参§7：秋冬 | 6:00~19:00 | 任意 | 海洋\n" +
+            "§b大海参§7：夏秋 | 18:00~次日2:00 | 任意 | 海洋\n" +
+            "§b鬼鱼§7：全年 | 全天 | 任意 | 洞穴\n" +
+            "§b石鱼§7：全年 | 全天 | 任意 | 洞穴\n" +
+            "§b冰柱鱼§7：全年 | 全天 | 任意 | 冰雪\n" +
+            "§b岩浆鳗鱼§7：全年 | 全天 | 任意 | 下界\n" +
+            "§b沙鱼§7：全年 | 6:00~20:00 | 任意 | 沙漠/恶地\n" +
+            "§b蝎鲤鱼§7：全年 | 6:00~20:00 | 任意 | 沙漠/恶地\n" +
+            "§b比目鱼§7：春夏 | 6:00~20:00 | 任意 | 海洋\n" +
+            "§b午夜鲤鱼§7：全年 | 22:00~次日2:00 | 任意 | 内陆\n" +
+            "§b鲟鱼§7：夏冬 | 6:00~19:00 | 任意 | 河流/石岸/冰冻河流/丛林/竹林/稀疏丛林\n" +
+            "§b虎纹鳟鱼§7：秋冬 | 6:00~19:00 | 任意 | 内陆\n" +
+            "§b罗非鱼§7：夏秋 | 6:00~14:00 | 任意 | 海洋/内陆（除洞穴/干旱外）\n" +
+            "§b鲢鱼§7：全年 | 全天 | 任意 | 内陆\n" +
+            "§b马哈脂鲤§7：夏 | 6:00~19:00 | 任意 | 内陆\n" +
+            "§b青花鱼§7：秋冬 | 全天 | 任意 | 海洋\n" +
+            "§b西鲱§7：春夏秋 | 9:00~次日2:00 | 雨 | 内陆\n" +
+            "§b蛇齿单线鱼§7：冬 | 全天 | 任意 | 内陆\n" +
+            "§b大比目鱼§7：春夏冬 | 全天 | 任意 | 海洋\n" +
+            "§b木跃鱼§7：全年 | 全天 | 任意 | 沼泽/红树林沼泽/丛林/竹林/稀疏丛林/针叶林/积雪针叶林/原始松木针叶林/原始云杉针叶林\n" +
+            "§b虚空鲑鱼§7：全年 | 全天 | 任意 | 沼泽/红树林沼泽\n" +
+            "§b史莱姆鱼§7：全年 | 全天 | 任意 | 沼泽/红树林沼泽\n" +
+            "§b黄貂鱼§7：全年 | 全天 | 任意 | 热带\n" +
+            "§b狮子鱼§7：全年 | 全天 | 任意 | 暖洋\n" +
+            "§b蓝铁饼鱼§7：全年 | 全天 | 任意 | 热带\n" +
+            "§b虾虎鱼§7：全年 | 全天 | 任意 | 滴水石洞/繁茂洞穴/丛林/竹林/稀疏丛林/针叶林/积雪针叶林/原始松木针叶林/原始云杉针叶林\n\n" +
+            "§l——鱼王（可钓，需特定鱼饵）——\n" +
+            "§b传说之鱼§7：春季 | 全天 | 任意 | 内陆\n" +
+            "§b绯红鱼§7：夏季 | 全天 | 任意 | 海洋\n" +
+            "§b鮟鱇鱼§7：秋季 | 全天 | 任意 | 内陆\n" +
+            "§b冰川鱼§7：冬季 | 全天 | 任意 | 内陆\n" +
+            "§b变种鲤鱼§7：全年 | 全天 | 雨天 | 沼泽/红树林沼泽\n" +
+            "§7需水深>10，装备挑战鱼饵（33%概率）或对应鱼王的针对性鱼饵（33%×运气）方可钓上，可多次钓取\n\n" +
+            "§l——暂未开放——\n" +
+            "§8绯红鱼之子、雌鮟鱇鱼、传说之鱼二代、小冰川鱼、放射性鲤鱼、午夜鱿鱼、幽灵鱼、水滴鱼\n\n" +
+            "§8垃圾|藻类|凝胶不限季节时间天气群系。"
         ));
 
         categories.add(new CategoryEntry("古物 & 杂项",
@@ -357,13 +429,26 @@ public class GuideBookScreen extends Screen {
     }
 
     private int getContentMaxScroll() {
-        if (selectedCategory != SKILL_CATEGORY_INDEX) return 0;
+        if (selectedCategory != SKILL_CATEGORY_INDEX && selectedCategory != FISH_CATEGORY_INDEX) return 0;
         if (selectedCategory < 0 || selectedCategory >= categories.size()) return 0;
         int contentX = LEFT_PANEL_W + 10;
         int contentW = this.width - contentX - 10;
         int contentH = this.height - TOP_OFFSET - 10;
         int lines = wrappedLines(categories.get(selectedCategory).content(), contentW - 4).size();
         return Math.max(0, lines * 10 - (contentH - 10));
+    }
+
+    private static String stripColors(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '§' && i + 1 < s.length()) {
+                i++;
+                continue;
+            }
+            sb.append(c);
+        }
+        return sb.toString();
     }
 
     private List<String> wrappedLines(String text, int maxWidth) {
@@ -373,28 +458,24 @@ public class GuideBookScreen extends Screen {
                 result.add("");
                 continue;
             }
-            // 提取段首颜色码，保证换行后颜色延续
-            String colorPrefix = "";
-            if (raw.startsWith("§") && raw.length() >= 2) {
-                colorPrefix = raw.substring(0, 2);
-            }
             StringBuilder line = new StringBuilder();
+            String activeColor = "";
             for (int i = 0; i < raw.length(); i++) {
-                String ch = raw.substring(i, i + 1);
-                // 颜色码原样保留，不计入宽度
-                if (ch.equals("§")) {
-                    line.append(ch);
+                char ch = raw.charAt(i);
+                if (ch == '§') {
                     if (i + 1 < raw.length()) {
-                        line.append(raw.charAt(i + 1));
+                        String code = raw.substring(i, i + 2);
+                        line.append(code);
+                        activeColor = code;
                         i++;
                     }
                     continue;
                 }
-                if (textRenderer.getWidth(line.toString() + ch) > maxWidth) {
+                if (textRenderer.getWidth(stripColors(line.toString()) + ch) > maxWidth) {
                     result.add(line.toString());
                     line.setLength(0);
-                    if (!colorPrefix.isEmpty()) {
-                        line.append(colorPrefix);
+                    if (!activeColor.isEmpty()) {
+                        line.append(activeColor);
                     }
                 }
                 line.append(ch);
@@ -451,7 +532,7 @@ public class GuideBookScreen extends Screen {
                 if (lineY > contentY + contentH) break;
                 if (lineY >= contentY - 10) {
                     if (line.isEmpty()) {
-                        if (selectedCategory == SKILL_CATEGORY_INDEX) {
+                        if (selectedCategory == SKILL_CATEGORY_INDEX || selectedCategory == FISH_CATEGORY_INDEX) {
                             lineY += 4;
                         }
                         continue;
