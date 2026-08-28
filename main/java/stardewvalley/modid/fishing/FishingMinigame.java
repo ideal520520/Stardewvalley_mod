@@ -9,7 +9,7 @@ public class FishingMinigame {
     public static final float CHEST_PROGRESS_MAX = POINTS_TO_FINISH * 0.67F;
     public static final float CHEST_CHANCE = 0.15F;
 
-    private static final float UP_ACCELERATION = 0.58F;
+    private static final float UP_ACCELERATION = 0.5F;
     private static final float GRAVITY = -0.7F;
     private static final int MAX_BOBBER_HEIGHT = 106;
     private static final int MAX_FISH_HEIGHT = FishBehavior.MAX_HEIGHT;

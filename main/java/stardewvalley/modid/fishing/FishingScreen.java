@@ -17,6 +17,7 @@ import stardewvalley.modid.StardewValley;
 import stardewvalley.modid.gui.ClockHudRenderer;
 import stardewvalley.modid.item.RodComponent;
 import stardewvalley.modid.skill.SkillRegistry;
+import org.joml.Matrix3x2fStack;
 
 public class FishingScreen extends Screen {
     private static final Text TITLE = Text.literal("Fishing Minigame");
@@ -53,6 +54,10 @@ public class FishingScreen extends Screen {
     private boolean chestObtained = false;
 
     private int barHeight;
+
+    // 刻度装饰旋转动画（围绕纹理坐标(48,1)，即屏幕(leftPos+6, topPos+130)）
+    private float spinnerAngle = 0F;
+    private static final float SPINNER_SPEED = (float) Math.toRadians(18.0F); // 18°/tick = 1秒一圈
 
     // 渔具效果标记
     private boolean hasTreasureHunter = false;
@@ -238,7 +243,14 @@ public class FishingScreen extends Screen {
             context.fill(leftPos + 33, (int) (topPos + 148), leftPos + 37,
                 (int) (topPos + 148 - progress * 145), color);
 
+            // 刻度装饰：围绕纹理坐标(48,1)旋转（屏幕锚点 leftPos+6, topPos+130）
+            Matrix3x2fStack mats = context.getMatrices();
+            mats.pushMatrix();
+            mats.translate(leftPos + 6.0F, topPos + 130.0F);
+            mats.rotate(spinnerAngle);
+            mats.translate(-(leftPos + 6.0F), -(topPos + 130.0F));
             context.drawTexture(RenderPipelines.GUI_TEXTURED, TEXTURE, leftPos + 5, topPos + 129, 47.0f, 0.0f, 8, 3, 256, 256);
+            mats.popMatrix();
 
             boolean isPerfect = minigame.getSuccessTicks() == minigame.getTotalTicks() || hasTreasureHunter;
             if (status == Status.SUCCESS && isPerfect) {
@@ -286,6 +298,8 @@ public class FishingScreen extends Screen {
             case MINIGAME -> {
                 minigame.tick(mouseDown);
                 progressBar.setValue(minigame.getProgress());
+                // 按住（绿条上升）逆时针，松开（绿条下降）顺时针
+                spinnerAngle += mouseDown ? -SPINNER_SPEED : SPINNER_SPEED;
 
                 if (reelSoundTimer == -1 || --reelSoundTimer == 0) {
                     reelSoundTimer = mouseDown ? 30 : 20;
