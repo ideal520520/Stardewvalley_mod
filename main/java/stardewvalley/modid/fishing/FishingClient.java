@@ -19,7 +19,7 @@ public class FishingClient implements ClientModInitializer {
                 var player = context.client().player;
                 if (player != null) {
                     player.getEntityWorld().playSound(player, player.getBlockPos(),
-                        FishingSounds.FISH_BITE, SoundCategory.MASTER, 2.0F, 1.0F);
+                        FishingSounds.FISH_BITE, SoundCategory.MASTER, 1.8F, 1.0F);
                 }
             });
         });

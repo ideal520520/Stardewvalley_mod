@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import stardewvalley.modid.fishing.FishingModeManager;
+import stardewvalley.modid.fishing.FishingSounds;
 import stardewvalley.modid.season.FishingLootManager;
 
 @Mixin(FishingBobberEntity.class)
@@ -41,6 +42,10 @@ public abstract class FishingBobberCatchMixin {
 
         ServerWorld serverWorld = (ServerWorld) player.getEntityWorld();
         BlockPos pos = self.getBlockPos();
+
+        // 右键收杆拉鱼：播放鱼击打音
+        serverWorld.playSound(null, pos, FishingSounds.FISH_HIT, SoundCategory.MASTER, 1.8F, 1.0F);
+
         FishingLootManager.handleCatch(serverWorld, player, pos);
 
         serverWorld.playSound(null, pos,

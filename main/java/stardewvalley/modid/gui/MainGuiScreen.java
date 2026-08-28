@@ -257,7 +257,22 @@ public class MainGuiScreen extends Screen {
 
     private boolean tryOpenSkillCategory(double mx, double my, int iconX, int iconY, SkillRegistry.Category category) {
         if (mx >= iconX && mx < iconX + 16 && my >= iconY && my < iconY + 16) {
-            // 精通：未精通且精通等级高于已精通数时，点击该技能即可精通
+            String tier1 = ClockHudRenderer.getClientSkill(category, 1);
+            String tier2 = ClockHudRenderer.getClientSkill(category, 2);
+            int level = getClientCategoryLevel(category);
+
+            // 优先选择天赋：5级未选一级天赋 → 打开技能选择界面
+            if (tier1 == null) {
+                if (level >= 5 && client != null) client.setScreen(new SkillSelectionScreen(category));
+                return true;
+            }
+            // 10级未选二级天赋 → 打开技能选择界面
+            if (tier2 == null) {
+                if (level >= 10 && client != null) client.setScreen(new SkillSelectionScreen(category));
+                return true;
+            }
+
+            // 两个天赋都已选满：未精通且精通经验足够 → 点击精通该技能
             if (!ClockHudRenderer.isClientMastered(category)
                 && ClockHudRenderer.getClientMasteryLevel() > ClockHudRenderer.getClientMasteredCount()) {
                 if (client != null && client.player != null) {
@@ -266,16 +281,8 @@ public class MainGuiScreen extends Screen {
                 }
                 return true;
             }
-            // 已精通：点击无反应
-            if (ClockHudRenderer.isClientMastered(category)) {
-                return true;
-            }
-            String tier2 = ClockHudRenderer.getClientSkill(category, 2);
-            if (tier2 != null) return true;
-            String tier1 = ClockHudRenderer.getClientSkill(category, 1);
-            int level = getClientCategoryLevel(category);
-            if (tier1 != null && level < 10) return true;
-            if (client != null) client.setScreen(new SkillSelectionScreen(category));
+
+            // 已精通或精通经验不足：天赋已选定，不可更改
             return true;
         }
         return false;

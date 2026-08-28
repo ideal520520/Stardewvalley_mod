@@ -166,10 +166,4 @@ public class SkillDataManager extends PersistentState {
         data.setLevel10(category, skillId);
         setDirty(true);
     }
-
-    public void clearLevel10(UUID playerUuid, SkillRegistry.Category category) {
-        PlayerSkillData data = getOrCreate(playerUuid);
-        data.setLevel10(category, null);
-        setDirty(true);
-    }
 }

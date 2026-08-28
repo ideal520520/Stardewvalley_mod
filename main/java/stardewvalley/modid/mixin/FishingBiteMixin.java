@@ -34,7 +34,7 @@ public class FishingBiteMixin {
                 }
             }
             // 非SV鱼竿仍使用星露谷风格提示音，但只自己听
-            instance.playSound(FishingSounds.FISH_BITE, 2.0F, 1.0F);
+            instance.playSound(FishingSounds.FISH_BITE, 1.8F, 1.0F);
         } else {
             instance.playSound(event, volume, pitch);
         }

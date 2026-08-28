@@ -102,7 +102,8 @@ public class CombatLevelManager extends PersistentState {
                     data.healthBonus++;
                 }
             }
-            applyHealthBonus(player, data.healthBonus);
+            // 完整重算：等级 + 天赋(战士/防御者) + 精通，避免升级覆盖已选天赋加成
+            applyHealthBonus(player);
         }
 
         setDirty(true);

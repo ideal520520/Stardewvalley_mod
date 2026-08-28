@@ -176,14 +176,18 @@ public class FishShopScreen extends Screen {
 
                 if (mx >= x && mx < x + CELL && my >= y && my < y + CELL) {
                     if (entry.isTodo) return true;
+                    int buyCount = getClickBuyCount();
+                    // 针对性鱼饵：受每日库存限制
+                    if (entry.itemId.equals(dailyBaitId)) {
+                        if (dailyBaitStock <= 0) return true;
+                        buyCount = Math.min(buyCount, dailyBaitStock);
+                    }
                     int currentGold = ClockHudRenderer.getClientGold();
-                    if (currentGold >= entry.price) {
-                        // 针对性鱼饵：判断库存
+                    if (currentGold >= entry.price * buyCount) {
                         if (entry.itemId.equals(dailyBaitId)) {
-                            if (dailyBaitStock <= 0) return true;
-                            dailyBaitStock--;
+                            dailyBaitStock -= buyCount;
                         }
-                        ClientPlayNetworking.send(new ModPayloads.FishShopBuyC2SPayload(entry.itemId, 1));
+                        ClientPlayNetworking.send(new ModPayloads.FishShopBuyC2SPayload(entry.itemId, buyCount));
                     }
                     return true;
                 }
@@ -208,6 +212,16 @@ public class FishShopScreen extends Screen {
             }
         }
         return false;
+    }
+
+    private int getClickBuyCount() {
+        if (client == null) return 1;
+        boolean shift = org.lwjgl.glfw.GLFW.glfwGetKey(client.getWindow().getHandle(), org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+        boolean ctrl = org.lwjgl.glfw.GLFW.glfwGetKey(client.getWindow().getHandle(), org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+        if (shift && ctrl) return 999;
+        if (ctrl) return 25;
+        if (shift) return 5;
+        return 1;
     }
 
     private int getClickSellCount(int stackSize) {

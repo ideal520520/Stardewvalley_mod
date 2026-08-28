@@ -23,6 +23,7 @@ import stardewvalley.modid.StardewValley;
 import stardewvalley.modid.fishing.FishingDataStorage;
 import stardewvalley.modid.fishing.FishingHookLogic;
 import stardewvalley.modid.fishing.FishingModeManager;
+import stardewvalley.modid.fishing.FishingSounds;
 import stardewvalley.modid.gui.ModPayloads;
 import stardewvalley.modid.item.ModFishingRodItem;
 import stardewvalley.modid.item.RodComponent;
@@ -54,6 +55,9 @@ public abstract class StardewFishingHookMixin {
         ServerWorld serverWorld = (ServerWorld) player.getEntityWorld();
         ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
         BlockPos pos = self.getBlockPos();
+
+        // 右键收杆拉鱼：播放鱼击打音
+        serverWorld.playSound(null, pos, FishingSounds.FISH_HIT, SoundCategory.MASTER, 1.8F, 1.0F);
 
         // 读取鱼竿上的鱼饵/渔具
         ItemStack rod = FishingLootManager.isSvRod(stack) ? stack : ItemStack.EMPTY;

@@ -41,7 +41,7 @@ public class ModFishingRodItem extends FishingRodItem {
 
         world.playSound(null, user.getX(), user.getY(), user.getZ(),
             stardewvalley.modid.fishing.FishingSounds.CAST,
-            net.minecraft.sound.SoundCategory.MASTER, 1.0F, 1.0F);
+            net.minecraft.sound.SoundCategory.MASTER, 1.8F, 1.0F);
 
         if (!world.isClient()) {
             net.minecraft.entity.projectile.FishingBobberEntity bobber =

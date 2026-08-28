@@ -50,14 +50,13 @@ public class FishingScreen extends Screen {
 
     private final Shake shake = new Shake(0.75F, 1);
     public int reelSoundTimer = -1;
-    private java.util.Random creakRandom = new java.util.Random();
     private boolean chestObtained = false;
 
     private int barHeight;
 
     // 刻度装饰旋转动画（围绕纹理坐标(48,1)，即屏幕(leftPos+6, topPos+130)）
     private float spinnerAngle = 0F;
-    private static final float SPINNER_SPEED = (float) Math.toRadians(18.0F); // 18°/tick = 1秒一圈
+    private static final float SPINNER_SPEED = (float) Math.toRadians(54.0F); // 54°/tick = 0.33秒一圈
 
     // 渔具效果标记
     private boolean hasTreasureHunter = false;
@@ -352,13 +351,7 @@ public class FishingScreen extends Screen {
         if (success) {
             playSound(FishingSounds.COMPLETE);
         } else {
-            int idx = creakRandom.nextInt(3);
-            SoundEvent creak = switch (idx) {
-                case 0 -> SoundEvent.of(Identifier.of(FishingSounds.MODID, "reel_creak1"));
-                case 1 -> SoundEvent.of(Identifier.of(FishingSounds.MODID, "reel_creak2"));
-                default -> SoundEvent.of(Identifier.of(FishingSounds.MODID, "reel_creak3"));
-            };
-            playSound(creak);
+            playSound(FishingSounds.FISH_ESCAPE);
         }
         shake.setValues(2.0F, 1);
     }
@@ -366,7 +359,7 @@ public class FishingScreen extends Screen {
     public void playSound(SoundEvent event) {
         if (client != null && client.world != null) {
             client.world.playSound(client.player, client.player.getBlockPos(),
-                event, SoundCategory.MASTER, 1.0F, 1.0F);
+                event, SoundCategory.MASTER, 1.8F, 1.0F);
         }
     }
 

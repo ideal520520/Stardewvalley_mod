@@ -2137,14 +2137,14 @@ public class StardewValley implements ModInitializer {
 					// 检查等级是否>=5
 					int level = getCategoryLevel(player, category);
 					if (level < 5) return;
+					// 一级天赋一旦选定不可更改
+					if (sdm.getLevel5Skill(uuid, category) != null) return;
 
 					// 检查技能是否存在且为一级
 					stardewvalley.modid.skill.SkillRegistry.SkillEntry entry = stardewvalley.modid.skill.SkillRegistry.get(skillId);
 					if (entry == null || entry.tier != 1 || entry.category != category) return;
 					if (!entry.enabled) return;
 
-					// 清除旧的二级技能（因为一级技能换了）
-					sdm.clearLevel10(uuid, category);
 					sdm.setLevel5Skill(uuid, category, skillId);
 				} else if (tier == 2) {
 					// 检查等级是否>=10
@@ -2154,6 +2154,8 @@ public class StardewValley implements ModInitializer {
 					// 检查前置一级技能是否已选
 					String tier1Choice = sdm.getLevel5Skill(uuid, category);
 					if (tier1Choice == null) return;
+					// 二级天赋一旦选定不可更改
+					if (sdm.getLevel10Skill(uuid, category) != null) return;
 
 					// 检查技能是否存在、为二级、属于正确类别且有正确前置
 					stardewvalley.modid.skill.SkillRegistry.SkillEntry entry = stardewvalley.modid.skill.SkillRegistry.get(skillId);
@@ -2162,6 +2164,11 @@ public class StardewValley implements ModInitializer {
 					if (!tier1Choice.equals(entry.prerequisite)) return;
 
 					sdm.setLevel10Skill(uuid, category, skillId);
+				}
+
+				// 战斗天赋变更后立即重新应用生命加成（战士+3/防御者+5，实时生效）
+				if (category == stardewvalley.modid.skill.SkillRegistry.Category.COMBAT) {
+					stardewvalley.modid.season.CombatLevelManager.get(sw).applyHealthBonus(player);
 				}
 
 				// 同步给所有玩家（本客户端也需要更新）
@@ -2200,6 +2207,15 @@ public class StardewValley implements ModInitializer {
 				stardewvalley.modid.skill.MasteryManager mgr = stardewvalley.modid.skill.MasteryManager.get(sw);
 
 				stardewvalley.modid.skill.SkillRegistry.Category category = stardewvalley.modid.skill.SkillRegistry.Category.values()[payload.categoryOrdinal()];
+
+				// 精通前置校验：该技能的两个天赋必须都已选满
+				stardewvalley.modid.skill.SkillDataManager sdm = stardewvalley.modid.skill.SkillDataManager.get(sw);
+				if (sdm.getLevel5Skill(uuid, category) == null || sdm.getLevel10Skill(uuid, category) == null) {
+					player.sendMessage(net.minecraft.text.Text.literal("§c请先选择该技能的两个天赋后再精通"), false);
+					sendMasterySync(player, sw, uuid);
+					return;
+				}
+
 				if (mgr.tryMaster(sw, player, category.name())) {
 					grantMasteryRewards(player, sw, category);
 					player.sendMessage(net.minecraft.text.Text.literal("§a已精通技能: " + categoryName(category) + masteryRewardText(category)), false);
