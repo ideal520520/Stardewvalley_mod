@@ -2251,9 +2251,9 @@ public class StardewValley implements ModInitializer {
 	/** 各技能精通奖励提示文本 */
 	private static String masteryRewardText(stardewvalley.modid.skill.SkillRegistry.Category category) {
 		return switch (category) {
-			case FARMING -> "  §e获得：铱镰刀×1";
+			case FARMING -> "  §e获得：铱镰刀×1，可找到金色动物饼干";
 			case FORAGING -> "  §e解锁：可找到金色迷之盒";
-			case FISHING -> "  §e获得：高级铱金鱼竿×1、挑战鱼饵×100";
+			case FISHING -> "  §e获得：高级铱金鱼竿×1、挑战鱼饵×100，可找到金色钓鱼宝箱";
 			case MINING -> "  §e解锁：宝石掉落数量翻倍";
 			case COMBAT -> "  §e获得：生命上限+4";
 		};
@@ -4423,8 +4423,13 @@ public class StardewValley implements ModInitializer {
 
 		double cum = 0.0;
 
-		// 金色动物饼干 0.5%（战利品表项）
-		if (roll < (cum += 0.005)) return entry("golden_animal_cracker", 1);
+		// 金色动物饼干 0.5%（战利品表项，需耕种精通）
+		boolean farmingMastered = stardewvalley.modid.skill.MasteryManager.hasMasteredSkill(
+			(net.minecraft.server.world.ServerWorld) player.getEntityWorld(), player.getUuid(),
+			stardewvalley.modid.skill.SkillRegistry.Category.FARMING);
+		if (farmingMastered) {
+			if (roll < (cum += 0.005)) return entry("golden_animal_cracker", 1);
+		} else { cum += 0.005; }
 		// 魔法糖冰棍 0.4%
 		if (roll < (cum += 0.004)) return entry("magic_rock_candy", 1);
 		// 五彩碎片 0.79%

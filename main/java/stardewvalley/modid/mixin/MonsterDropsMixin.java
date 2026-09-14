@@ -143,8 +143,9 @@ public class MonsterDropsMixin {
             }
         }
 
-        // 0.15%概率掉落金色动物饼干（受最终运气影响）
-        if (self.getRandom().nextFloat() < 0.0015f * luckMultiplier) {
+        // 0.15%概率掉落金色动物饼干（需耕种精通，受最终运气影响）
+        if (stardewvalley.modid.skill.MasteryManager.hasMasteredSkill(world, player.getUuid(), stardewvalley.modid.skill.SkillRegistry.Category.FARMING)
+            && self.getRandom().nextFloat() < 0.0015f * luckMultiplier) {
             ItemStack stack = new ItemStack(ModItems.ITEMS.get("golden_animal_cracker"), 1);
             if (!stack.isEmpty()) {
                 self.dropStack(world, stack);

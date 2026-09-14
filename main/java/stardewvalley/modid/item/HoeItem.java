@@ -120,8 +120,10 @@ public class HoeItem extends Item {
                             }
                         }
 
-                        // 0.1%概率掉落金色动物饼干（受最终运气影响）
-                        if (serverWorld.random.nextFloat() < 0.001f * luckMult) {
+                        // 0.1%概率掉落金色动物饼干（需耕种精通，受最终运气影响）
+                        if (stardewvalley.modid.skill.MasteryManager.hasMasteredSkill(serverWorld, player.getUuid(),
+                                stardewvalley.modid.skill.SkillRegistry.Category.FARMING)
+                            && serverWorld.random.nextFloat() < 0.001f * luckMult) {
                             Item crackerItem = Registries.ITEM.get(Identifier.of(StardewValley.MOD_ID, "golden_animal_cracker"));
                             if (crackerItem != null) {
                                 ItemStack crackerStack = new ItemStack(crackerItem);

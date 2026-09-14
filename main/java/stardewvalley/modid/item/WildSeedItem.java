@@ -36,7 +36,9 @@ public class WildSeedItem extends Item {
         if (!world.isAir(cropPos)) return ActionResult.PASS;
 
         if (!world.isClient()) {
-            if (seasons.length > 0) {
+            // 花盆(allowsAllSeasons)上种植跳过季节检查
+            boolean isAllSeason = state.getBlock() instanceof ModFarmlandBlock farmland && farmland.allowsAllSeasons();
+            if (!isAllSeason && seasons.length > 0) {
                 Season current = Season.fromTimeOfDay(world.getTimeOfDay());
                 boolean validSeason = false;
                 for (Season s : seasons) {

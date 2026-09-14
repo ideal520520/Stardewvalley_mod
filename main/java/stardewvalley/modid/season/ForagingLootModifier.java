@@ -242,8 +242,9 @@ public class ForagingLootModifier {
                     }
                 }
 
-                // 0.1%概率掉落金色动物饼干（星露谷斧头砍原木，受最终运气影响）
-                if (isLog) {
+                // 0.1%概率掉落金色动物饼干（星露谷斧头砍原木，需耕种精通，受最终运气影响）
+                if (isLog && stardewvalley.modid.skill.MasteryManager.hasMasteredSkill(sw, serverPlayer.getUuid(),
+                    stardewvalley.modid.skill.SkillRegistry.Category.FARMING)) {
                     ItemStack held = player.getMainHandStack();
                     boolean isSvAxe = !held.isEmpty()
                         && StardewValley.MOD_ID.equals(Registries.ITEM.getId(held.getItem()).getNamespace())

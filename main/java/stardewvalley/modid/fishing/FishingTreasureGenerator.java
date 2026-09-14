@@ -303,6 +303,11 @@ public class FishingTreasureGenerator {
                 && (playerUuid == null || !stardewvalley.modid.skill.MasteryManager.hasMasteredSkill(world, playerUuid, stardewvalley.modid.skill.SkillRegistry.Category.FORAGING))) {
                 continue;
             }
+            // 金色动物饼干：需耕种精通才能获得
+            if (entry.itemId.equals("golden_animal_cracker")
+                && (playerUuid == null || !stardewvalley.modid.skill.MasteryManager.hasMasteredSkill(world, playerUuid, stardewvalley.modid.skill.SkillRegistry.Category.FARMING))) {
+                continue;
+            }
 
             double chance = entry.baseChance;
             if (golden) {
