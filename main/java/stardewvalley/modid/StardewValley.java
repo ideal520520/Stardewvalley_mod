@@ -3659,14 +3659,22 @@ public class StardewValley implements ModInitializer {
 				ServerPlayerEntity player = handler.getPlayer();
 				ServerWorld world = (ServerWorld) player.getEntityWorld();
 
-				// 首次进入世界赠送任务书
 				WelcomeMessageState msgState = WelcomeMessageState.get(world);
-				if (!msgState.hasReceivedGuideBook(player.getUuid())) {
-					Item guideBook = Registries.ITEM.get(Identifier.of(MOD_ID, "guide_book"));
-					if (guideBook != null) {
-						player.getInventory().offerOrDrop(new ItemStack(guideBook));
+
+				// 首次进入世界自动发放初始物品（每个玩家只发放一次）
+				InitialItemState itemState = InitialItemState.get(world);
+				if (!itemState.hasClaimed(player.getUuid())) {
+					itemState.markClaimed(player.getUuid());
+					if (!msgState.hasReceivedGuideBook(player.getUuid())) {
 						msgState.markGuideBookReceived(player.getUuid());
+						giveItem(player, "guide_book", 1);
 					}
+					giveItem(player, "pickaxe", 1);
+					giveItem(player, "axe", 1);
+					giveItem(player, "hoe", 1);
+					giveItem(player, "watering_can", 1);
+					giveItem(player, "parsnip_seeds", 15);
+					giveItem(player, "parsnip", 5);
 				}
 
 				if (!msgState.isDisabled(player.getUuid())) {
