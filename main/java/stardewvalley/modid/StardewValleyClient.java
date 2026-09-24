@@ -31,9 +31,11 @@ import stardewvalley.modid.gui.ModScreenHandlers;
 import stardewvalley.modid.gui.OreShopScreen;
 import stardewvalley.modid.gui.RodHandledScreen;
 import stardewvalley.modid.gui.SandyShopScreen;
+import stardewvalley.modid.gui.SaturationHudRenderer;
 import stardewvalley.modid.gui.ShippingBoxScreen;
 import stardewvalley.modid.gui.SlingshotHandledScreen;
 import stardewvalley.modid.gui.TravelingCartScreen;
+import stardewvalley.modid.mixin.HungerManagerAccessor;
 
 public class StardewValleyClient implements ClientModInitializer {
 
@@ -153,6 +155,7 @@ public class StardewValleyClient implements ClientModInitializer {
 
         ModKeybindings.register();
         ClockHudRenderer.register();
+        SaturationHudRenderer.register();
         GreenRainOverlay.register();
 
         // 始终注册钓鱼小游戏客户端（由命令切换模式）
@@ -177,6 +180,16 @@ public class StardewValleyClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(ModPayloads.GoldSyncS2CPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
                 ClockHudRenderer.setClientGold(payload.gold());
+            });
+        });
+
+        // 接收饱和值/疲劳值同步（用于 HUD 显示）
+        ClientPlayNetworking.registerGlobalReceiver(ModPayloads.SaturationSyncS2CPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                if (context.client().player == null) return;
+                var hunger = context.client().player.getHungerManager();
+                hunger.setSaturationLevel(payload.saturation());
+                ((HungerManagerAccessor) hunger).setExhaustionLevel(payload.exhaustion());
             });
         });
 

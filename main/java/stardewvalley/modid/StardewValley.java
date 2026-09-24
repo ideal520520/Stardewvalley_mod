@@ -93,6 +93,7 @@ import stardewvalley.modid.item.ModItems;
 import stardewvalley.modid.item.ModItemGroups;
 import stardewvalley.modid.item.RodComponent;
 import stardewvalley.modid.item.StardropItem;
+import stardewvalley.modid.mixin.HungerManagerAccessor;
 import stardewvalley.modid.season.CombatLevelManager;
 import stardewvalley.modid.season.LuckManager;
 import stardewvalley.modid.season.MiningLevelManager;
@@ -148,6 +149,9 @@ public class StardewValley implements ModInitializer {
 			stardewvalley.modid.item.SlingshotComponent.TYPE
 		);
 
+		// 注册星之果实数量数据附件（必须在玩家数据加载前注册）
+		StardropData.register();
+
 		registerPayloads();
 		registerServerHandlers();
 		registerSkillHandlers();
@@ -188,6 +192,7 @@ public class StardewValley implements ModInitializer {
 		PayloadTypeRegistry.playS2C().register(ModPayloads.AnimalCatalogueDiscountS2CPayload.ID, ModPayloads.AnimalCatalogueDiscountS2CPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(ModPayloads.PriceCatalogueSyncS2CPayload.ID, ModPayloads.PriceCatalogueSyncS2CPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(ModPayloads.TreasureAppraisalSyncS2CPayload.ID, ModPayloads.TreasureAppraisalSyncS2CPayload.CODEC);
+		PayloadTypeRegistry.playS2C().register(ModPayloads.SaturationSyncS2CPayload.ID, ModPayloads.SaturationSyncS2CPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(ModPayloads.ShippingDataSyncS2CPayload.ID, ModPayloads.ShippingDataSyncS2CPayload.CODEC);
 		PayloadTypeRegistry.playS2C().register(ModPayloads.FarmingSyncS2CPayload.ID, ModPayloads.FarmingSyncS2CPayload.CODEC);
 
@@ -2563,15 +2568,12 @@ public class StardewValley implements ModInitializer {
 	}
 
 	private void registerStardropSaturationLogic() {
-		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-			for (ServerWorld world : server.getWorlds()) {
-				StardropItem.initDefaultSaturationCap(world);
-			}
-		});
-
 		ServerTickEvents.END_SERVER_TICK.register(server -> {
 			for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
 				StardropItem.clampPlayerSaturation(player);
+				ServerPlayNetworking.send(player, new ModPayloads.SaturationSyncS2CPayload(
+					player.getHungerManager().getSaturationLevel(),
+					((HungerManagerAccessor) player.getHungerManager()).getExhaustionLevel()));
 			}
 		});
 	}

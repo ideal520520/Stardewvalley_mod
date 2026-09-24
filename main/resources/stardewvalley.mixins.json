@@ -17,6 +17,8 @@
 		"FishingBobberMixin",
 		"FishingHookTimeMixin",
 		"HoeExhaustionMixin",
+		"HungerManagerAccessor",
+		"HungerManagerSaturationMixin",
 		"ItemCooldownEntryAccessor",
 		"ItemCooldownManagerAccessor",
 		"LeaveSapMixin",

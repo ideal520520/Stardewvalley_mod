@@ -33,6 +33,20 @@ public class ModPayloads {
     public static final Identifier ANIMAL_CATALOGUE_DISCOUNT_ID = Identifier.of(StardewValley.MOD_ID, "animal_catalogue_discount");
     public static final Identifier PRICE_CATALOGUE_SYNC_ID = Identifier.of(StardewValley.MOD_ID, "price_catalogue_sync");
     public static final Identifier TREASURE_APPRAISAL_SYNC_ID = Identifier.of(StardewValley.MOD_ID, "treasure_appraisal_sync");
+    public static final Identifier SATURATION_SYNC_ID = Identifier.of(StardewValley.MOD_ID, "saturation_sync");
+
+    public record SaturationSyncS2CPayload(float saturation, float exhaustion) implements CustomPayload {
+        public static final CustomPayload.Id<SaturationSyncS2CPayload> ID = new CustomPayload.Id<>(SATURATION_SYNC_ID);
+        public static final PacketCodec<PacketByteBuf, SaturationSyncS2CPayload> CODEC = PacketCodec.of(
+            (value, buf) -> {
+                buf.writeFloat(value.saturation);
+                buf.writeFloat(value.exhaustion);
+            },
+            buf -> new SaturationSyncS2CPayload(buf.readFloat(), buf.readFloat())
+        );
+        @Override
+        public CustomPayload.Id<? extends CustomPayload> getId() { return ID; }
+    }
 
     public record TreasureAppraisalSyncS2CPayload(boolean active) implements CustomPayload {
         public static final CustomPayload.Id<TreasureAppraisalSyncS2CPayload> ID = new CustomPayload.Id<>(TREASURE_APPRAISAL_SYNC_ID);
