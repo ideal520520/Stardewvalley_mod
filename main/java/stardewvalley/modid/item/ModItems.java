@@ -1170,10 +1170,10 @@ public class ModItems {
                     case "dish_of_the_sea" -> new StatusEffectInstance[]{
                         new StatusEffectInstance(ModStatusEffects.FISHING_BUFF, 6700, 2)
                     };
-                    // 矿工特供: 采矿 (+3), 磁性 (+32), 5min35s
+                    // 矿工特供: 采矿 (+3), 磁性 (+1), 5min35s
                     case "miners_treat" -> new StatusEffectInstance[]{
                         new StatusEffectInstance(ModStatusEffects.MINING_BUFF, 6700, 2),
-                        new StatusEffectInstance(ModStatusEffects.MAGNETISM_BUFF, 6700, 31),
+                        new StatusEffectInstance(ModStatusEffects.MAGNETISM_BUFF, 6700, 0),
                         new StatusEffectInstance(StatusEffects.HASTE, 6700, 2)
                     };
                     // 块茎拼盘: 攻击 (+3), 5min35s

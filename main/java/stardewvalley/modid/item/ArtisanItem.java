@@ -6,7 +6,9 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
+import stardewvalley.modid.equipment.RingEffectHandler;
 
 public class ArtisanItem extends Item {
 
@@ -184,10 +186,17 @@ public class ArtisanItem extends Item {
             if (healAmount > 0) {
                 user.heal(healAmount);
             }
-            if (effects != null) {
+            if (user instanceof ServerPlayerEntity player) {
+                if (effects != null) {
+                    RingEffectHandler.applyFoodEffects(player, effects);
+                } else if (type == ArtisanType.WINE) {
+                    // Default wine effect: slowness 1 for 30s
+                    RingEffectHandler.registerFoodBuff(player, StatusEffects.SLOWNESS, 1, 600);
+                }
+            } else if (effects != null) {
                 for (StatusEffectInstance effect : effects) {
                     if (effect != null) {
-                        user.addStatusEffect(effect);
+                        user.addStatusEffect(new StatusEffectInstance(effect));
                     }
                 }
             } else if (type == ArtisanType.WINE) {

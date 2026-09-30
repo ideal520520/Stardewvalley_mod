@@ -27,6 +27,7 @@ import stardewvalley.modid.item.ModWeaponItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -42,16 +43,16 @@ public class RingEffectHandler {
 
     private record FoodBuff(int level, int duration) {}
 
+    /** prev 记录：总等级 + 上 tick 的食物剩余时长 */
+    private record BuffSnapshot(int level, int duration) {}
+
     private static final Map<UUID, Boolean> phoenixUsed = new HashMap<>();
     private static final Map<UUID, Integer> protectionImmunityTicks = new HashMap<>();
     private static final Map<UUID, Boolean> prevGlowVision = new HashMap<>();
-    private static final Map<UUID, Integer> prevDefense = new HashMap<>();
-    private static final Map<UUID, Integer> prevLuck = new HashMap<>();
-    private static final Map<UUID, Integer> prevImmunity = new HashMap<>();
-    private static final Map<UUID, Integer> prevMagnetism = new HashMap<>();
-    private static final Map<UUID, FoodBuff> luckFood = new HashMap<>();
-    private static final Map<UUID, FoodBuff> defFood = new HashMap<>();
-    private static final Map<UUID, FoodBuff> magFood = new HashMap<>();
+    /** 食物/饮品来源：载体效果 -> (等级, 剩余时长) */
+    private static final Map<UUID, Map<RegistryEntry<StatusEffect>, FoodBuff>> foodBuffs = new HashMap<>();
+    /** 上次重建状态：载体效果 -> (总等级, 食物剩余时长)，用于判断 等级/时间 变化 */
+    private static final Map<UUID, Map<RegistryEntry<StatusEffect>, BuffSnapshot>> prevBuffs = new HashMap<>();
 
     private static String getRingId(EquipmentInventory inv, int slot) {
         ItemStack stack = inv.getSlot(slot);
@@ -63,25 +64,100 @@ public class RingEffectHandler {
 
     private static final Identifier WIND_WAY_SPEED_ID = Identifier.of(StardewValley.MOD_ID, "wind_way_speed");
 
-    /** 由 DishItem 调用，直接注册食物增益，避免 addStatusEffect 导致瞬间图标闪现 */
-    public static void registerFoodBuff(UUID playerUuid, RegistryEntry<StatusEffect> type, int level, int duration) {
-        FoodBuff fb = new FoodBuff(level, duration);
-        if (type == ModStatusEffects.LUCK_BUFF) {
-            FoodBuff cur = luckFood.get(playerUuid);
-            if (cur == null || level > cur.level() || (level == cur.level() && duration > cur.duration())) {
-                luckFood.put(playerUuid, fb);
-            }
-        } else if (type == ModStatusEffects.DEFENSE_BUFF) {
-            FoodBuff cur = defFood.get(playerUuid);
-            if (cur == null || level > cur.level() || (level == cur.level() && duration > cur.duration())) {
-                defFood.put(playerUuid, fb);
-            }
-        } else if (type == ModStatusEffects.MAGNETISM_BUFF) {
-            FoodBuff cur = magFood.get(playerUuid);
-            if (cur == null || level > cur.level() || (level == cur.level() && duration > cur.duration())) {
-                magFood.put(playerUuid, fb);
+    /** 食物效果 -> 实际施加/显示的载体效果（运气/防御/磁性合并进对应的戒指 buff） */
+    private static RegistryEntry<StatusEffect> carrierOf(RegistryEntry<StatusEffect> foodType) {
+        if (foodType == ModStatusEffects.LUCK_BUFF) return ModStatusEffects.RING_LUCK_BUFF;
+        if (foodType == ModStatusEffects.DEFENSE_BUFF) return ModStatusEffects.RING_DEFENSE_BUFF;
+        if (foodType == ModStatusEffects.MAGNETISM_BUFF) return ModStatusEffects.RING_MAGNETISM_BUFF;
+        return foodType;
+    }
+
+    /** 该载体是否只由本引擎提供（可安全 remove+add）；原版效果则用原版叠加规则，避免清掉其它来源 */
+    private static boolean isOwnedCarrier(RegistryEntry<StatusEffect> carrier) {
+        return carrier == ModStatusEffects.RING_LUCK_BUFF
+            || carrier == ModStatusEffects.RING_DEFENSE_BUFF
+            || carrier == ModStatusEffects.RING_MAGNETISM_BUFF
+            || carrier == ModStatusEffects.IMMUNITY
+            || carrier == ModStatusEffects.MINING_BUFF
+            || carrier == ModStatusEffects.FISHING_BUFF
+            || carrier == ModStatusEffects.FARMING_BUFF
+            || carrier == ModStatusEffects.FORAGING_BUFF
+            || carrier == ModStatusEffects.MAX_ENERGY_BUFF
+            || carrier == ModStatusEffects.SQUID_INK_RAVIOLI_BUFF;
+    }
+
+    /** 由 DishItem/ArtisanItem 调用：只登记 等级+剩余时长，实际施加统一在 onPlayerTick 处理 */
+    public static void registerFoodBuff(ServerPlayerEntity player, RegistryEntry<StatusEffect> foodType, int level, int duration) {
+        RegistryEntry<StatusEffect> carrier = carrierOf(foodType);
+        Map<RegistryEntry<StatusEffect>, FoodBuff> map = foodBuffs.computeIfAbsent(player.getUuid(), k -> new HashMap<>());
+        FoodBuff cur = map.get(carrier);
+        // 更强才覆盖：等级更高，或等级相同且时长更长
+        if (cur == null || level > cur.level() || (level == cur.level() && duration > cur.duration())) {
+            map.put(carrier, new FoodBuff(level, duration));
+        }
+    }
+
+    /** 统一施加食物/饮品效果 */
+    public static void applyFoodEffects(ServerPlayerEntity player, StatusEffectInstance[] effects) {
+        if (effects == null) return;
+        for (StatusEffectInstance effect : effects) {
+            if (effect == null) continue;
+            registerFoodBuff(player, effect.getEffectType(), effect.getAmplifier() + 1, effect.getDuration());
+        }
+    }
+
+    /** 合并显示的载体（运气/防御/磁性/免疫）沿用环境粒子样式，其余效果保持原版默认样式 */
+    private static boolean isDisplayCarrier(RegistryEntry<StatusEffect> carrier) {
+        return carrier == ModStatusEffects.RING_LUCK_BUFF
+            || carrier == ModStatusEffects.RING_DEFENSE_BUFF
+            || carrier == ModStatusEffects.RING_MAGNETISM_BUFF
+            || carrier == ModStatusEffects.IMMUNITY;
+    }
+
+    /**
+     * 统一处理一个载体：递减食物时长 → 按 总等级/剩余时长 变化重建 → 外部清除（牛奶/死亡）检测。
+     * 返回总等级（装备 + 食物）。
+     */
+    private static int updateBuffChannel(ServerPlayerEntity player, RegistryEntry<StatusEffect> carrier, int equipLevel,
+                                         Map<RegistryEntry<StatusEffect>, FoodBuff> foods,
+                                         Map<RegistryEntry<StatusEffect>, BuffSnapshot> prevs) {
+        FoodBuff fb = foods.get(carrier);
+        int foodLevel = 0;
+        int foodDur = 0;
+        if (fb != null) {
+            int remain = fb.duration() - 1;
+            if (remain > 0) {
+                foods.put(carrier, new FoodBuff(fb.level(), remain));
+                foodLevel = fb.level();
+                foodDur = remain;
+            } else {
+                foods.remove(carrier);
             }
         }
+        int total = equipLevel + foodLevel;
+        BuffSnapshot prev = prevs.get(carrier);
+        boolean levelChanged = prev == null || prev.level() != total;
+        // 时间变化：仅当剩余时长比上次更长（重新吃刷新）时成立
+        boolean timeChanged = prev != null && foodDur > prev.duration();
+        boolean owned = isOwnedCarrier(carrier);
+        boolean ambient = isDisplayCarrier(carrier);
+        if (levelChanged || timeChanged) {
+            if (owned) player.removeStatusEffect(carrier);
+            if (total > 0) {
+                int dur = foodLevel > 0 ? foodDur : StatusEffectInstance.INFINITE;
+                player.addStatusEffect(new StatusEffectInstance(carrier, dur, total - 1, ambient, !ambient, true));
+            }
+        }
+        prevs.put(carrier, new BuffSnapshot(total, foodDur));
+        // 外部清除检测（牛奶/死亡）：效果应该存在但不在玩家身上
+        if (owned && total > 0 && !player.hasStatusEffect(carrier)) {
+            if (foodLevel > 0) foods.remove(carrier);
+            if (equipLevel > 0) {
+                player.addStatusEffect(new StatusEffectInstance(carrier, StatusEffectInstance.INFINITE, equipLevel - 1, ambient, !ambient, true));
+            }
+            prevs.put(carrier, new BuffSnapshot(equipLevel, 0));
+        }
+        return total;
     }
 
     public static Map<String, Integer> getEquippedRings(ServerPlayerEntity player) {
@@ -124,7 +200,7 @@ public class RingEffectHandler {
             prevGlowVision.put(uuid, true);
         }
 
-        // 防御 Buff（RING_DEFENSE_BUFF 显示总等级，移除食物 DEFENSE_BUFF）
+        // ===== 装备提供的等级 =====
         int equipDefense = 0;
         ItemStack held = player.getMainHandStack();
         if (held.getItem() instanceof ModWeaponItem weapon) {
@@ -139,127 +215,36 @@ public class RingEffectHandler {
         if (BookDataManager.get(world).hasUsedBook(player.getUuid(), "jack_be_nimble_jack_be_thick")) {
             equipDefense += 1;
         }
-        // 从持久Map读取食物防御（由 registerFoodBuff 写入）
-        FoodBuff defTracked = defFood.get(uuid);
-        int defFoodLevel = 0;
-        int defFoodDur = 0;
-        if (defTracked != null) {
-            int remain = defTracked.duration() - 1;
-            if (remain > 0) {
-                defFood.put(uuid, new FoodBuff(defTracked.level(), remain));
-                defFoodLevel = defTracked.level();
-                defFoodDur = remain;
-            } else {
-                defFood.remove(uuid);
-            }
-        }
-        int totalDefense = equipDefense + defFoodLevel;
-        if (totalDefense != prevDefense.getOrDefault(uuid, -1)) {
-            player.removeStatusEffect(ModStatusEffects.RING_DEFENSE_BUFF);
-            if (totalDefense > 0) {
-                int dur = defFoodLevel > 0 ? defFoodDur : StatusEffectInstance.INFINITE;
-                player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.RING_DEFENSE_BUFF, dur, totalDefense - 1, true, false, true));
-            }
-            prevDefense.put(uuid, totalDefense);
-        }
-        // 外部清除检测（牛奶/死亡）：效果应该存在但不在玩家身上
-        if (totalDefense > 0 && !player.hasStatusEffect(ModStatusEffects.RING_DEFENSE_BUFF)) {
-            if (defFoodLevel > 0) defFood.remove(uuid);
-            if (equipDefense > 0) {
-                player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.RING_DEFENSE_BUFF, StatusEffectInstance.INFINITE, equipDefense - 1, true, false, true));
-            }
-            prevDefense.put(uuid, equipDefense);
-        }
-
-        // 幸运 Buff（RING_LUCK_BUFF 显示总等级）
-        int luckLevel = counts.getOrDefault("lucky_ring", 0);
-        FoodBuff luckTracked = luckFood.get(uuid);
-        int foodLuckLevel = 0;
-        int foodLuckDur = 0;
-        if (luckTracked != null) {
-            int remain = luckTracked.duration() - 1;
-            if (remain > 0) {
-                luckFood.put(uuid, new FoodBuff(luckTracked.level(), remain));
-                foodLuckLevel = luckTracked.level();
-                foodLuckDur = remain;
-            } else {
-                luckFood.remove(uuid);
-            }
-        }
-        int totalLuck = luckLevel + foodLuckLevel;
-        if (totalLuck != prevLuck.getOrDefault(uuid, -1)) {
-            player.removeStatusEffect(ModStatusEffects.RING_LUCK_BUFF);
-            if (totalLuck > 0) {
-                int dur = foodLuckLevel > 0 ? foodLuckDur : StatusEffectInstance.INFINITE;
-                player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.RING_LUCK_BUFF, dur, totalLuck - 1, true, false, true));
-            }
-            prevLuck.put(uuid, totalLuck);
-        }
-        // 外部清除检测（牛奶/死亡）：效果应该存在但不在玩家身上
-        if (totalLuck > 0 && !player.hasStatusEffect(ModStatusEffects.RING_LUCK_BUFF)) {
-            if (foodLuckLevel > 0) luckFood.remove(uuid);
-            if (luckLevel > 0) {
-                player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.RING_LUCK_BUFF, StatusEffectInstance.INFINITE, luckLevel - 1, true, false, true));
-            }
-            prevLuck.put(uuid, luckLevel);
-        }
-
-        // 免疫 Buff
-        int immunityLevel = counts.getOrDefault("immunity_band", 0);
-        ItemStack shoeStack2 = inv.getSlot(2);
-        int shoeImmunity = 0;
-        if (shoeStack2.getItem() instanceof ModShoesItem shoes) {
-            shoeImmunity = shoes.getImmunity();
-        }
-        int totalImmunity = immunityLevel * 4 + shoeImmunity;
-        if (totalImmunity != prevImmunity.getOrDefault(uuid, -1)) {
-            player.removeStatusEffect(ModStatusEffects.IMMUNITY);
-            if (totalImmunity > 0) {
-                player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.IMMUNITY, StatusEffectInstance.INFINITE, totalImmunity - 1, true, false, true));
-            }
-            prevImmunity.put(uuid, totalImmunity);
-        }
-        // 外部清除检测（牛奶/死亡）：效果应该存在但不在玩家身上
-        if (totalImmunity > 0 && !player.hasStatusEffect(ModStatusEffects.IMMUNITY)) {
-            player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.IMMUNITY, StatusEffectInstance.INFINITE, totalImmunity - 1, true, false, true));
-            prevImmunity.put(uuid, totalImmunity);
-        }
-
-        // 磁性 Buff（RING_MAGNETISM_BUFF 显示总等级）
-        int ringMagnetLevel = counts.getOrDefault("small_magnet_ring", 0) * 1
+        int equipLuck = counts.getOrDefault("lucky_ring", 0);
+        int equipMagnet = counts.getOrDefault("small_magnet_ring", 0) * 1
             + counts.getOrDefault("magnet_ring", 0) * 2
             + counts.getOrDefault("iridium_band", 0) * 2
             + counts.getOrDefault("glowstone_ring", 0) * 1;
-        FoodBuff magTracked = magFood.get(uuid);
-        int foodMagLevel = 0;
-        int foodMagDur = 0;
-        if (magTracked != null) {
-            int remain = magTracked.duration() - 1;
-            if (remain > 0) {
-                magFood.put(uuid, new FoodBuff(magTracked.level(), remain));
-                foodMagLevel = magTracked.level();
-                foodMagDur = remain;
-            } else {
-                magFood.remove(uuid);
-            }
+        int equipImmunity = counts.getOrDefault("immunity_band", 0) * 4;
+        ItemStack shoeStack2 = inv.getSlot(2);
+        if (shoeStack2.getItem() instanceof ModShoesItem shoes) {
+            equipImmunity += shoes.getImmunity();
         }
-        int totalMagnet = ringMagnetLevel + foodMagLevel;
-        if (totalMagnet != prevMagnetism.getOrDefault(uuid, -1)) {
-            player.removeStatusEffect(ModStatusEffects.RING_MAGNETISM_BUFF);
-            if (totalMagnet > 0) {
-                int dur = foodMagLevel > 0 ? foodMagDur : StatusEffectInstance.INFINITE;
-                player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.RING_MAGNETISM_BUFF, dur, totalMagnet - 1, true, false, true));
-            }
-            prevMagnetism.put(uuid, totalMagnet);
+
+        // ===== 食物/饮品 + 装备 buff 统一管理（总等级或时间变化时重建） =====
+        Map<RegistryEntry<StatusEffect>, Integer> equipLevels = new HashMap<>();
+        equipLevels.put(ModStatusEffects.RING_DEFENSE_BUFF, equipDefense);
+        equipLevels.put(ModStatusEffects.RING_LUCK_BUFF, equipLuck);
+        equipLevels.put(ModStatusEffects.RING_MAGNETISM_BUFF, equipMagnet);
+        equipLevels.put(ModStatusEffects.IMMUNITY, equipImmunity);
+
+        Map<RegistryEntry<StatusEffect>, FoodBuff> foods = foodBuffs.computeIfAbsent(uuid, k -> new HashMap<>());
+        Map<RegistryEntry<StatusEffect>, BuffSnapshot> prevs = prevBuffs.computeIfAbsent(uuid, k -> new HashMap<>());
+        Set<RegistryEntry<StatusEffect>> carriers = new HashSet<>(equipLevels.keySet());
+        carriers.addAll(foods.keySet());
+
+        int totalMagnet = 0;
+        for (RegistryEntry<StatusEffect> carrier : carriers) {
+            int total = updateBuffChannel(player, carrier, equipLevels.getOrDefault(carrier, 0), foods, prevs);
+            if (carrier == ModStatusEffects.RING_MAGNETISM_BUFF) totalMagnet = total;
         }
-        // 外部清除检测（牛奶/死亡）：效果应该存在但不在玩家身上
-        if (totalMagnet > 0 && !player.hasStatusEffect(ModStatusEffects.RING_MAGNETISM_BUFF)) {
-            if (foodMagLevel > 0) magFood.remove(uuid);
-            if (ringMagnetLevel > 0) {
-                player.addStatusEffect(new StatusEffectInstance(ModStatusEffects.RING_MAGNETISM_BUFF, StatusEffectInstance.INFINITE, ringMagnetLevel - 1, true, false, true));
-            }
-            prevMagnetism.put(uuid, ringMagnetLevel);
-        }
+        if (foods.isEmpty()) foodBuffs.remove(uuid);
+
         // 磁性拾取（总等级已包含食物）
         if (totalMagnet > 0) {
             double range = 1.5 + totalMagnet;
