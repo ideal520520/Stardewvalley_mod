@@ -52,8 +52,6 @@ public class FishingScreen extends Screen {
     public int reelSoundTimer = -1;
     private boolean chestObtained = false;
 
-    private int barHeight;
-
     // 刻度装饰旋转动画（围绕纹理坐标(48,1)，即屏幕(leftPos+6, topPos+130)）
     private float spinnerAngle = 0F;
     private static final float SPINNER_SPEED = (float) Math.toRadians(54.0F); // 54°/tick = 0.33秒一圈
@@ -168,7 +166,8 @@ public class FishingScreen extends Screen {
             minigame.setChallengeBaitActive(true);
         }
 
-        this.barHeight = FishingMinigame.getBobberBarHeight(fishingLevel) + minigame.getExtraBarHeight();
+        // 鱼王贴图 16px、普通鱼 15px，判定范围按实际渲染高度对齐
+        minigame.setFishRenderHeight(isLegendaryFish ? 16f : 15f);
     }
 
     @Override
@@ -208,10 +207,11 @@ public class FishingScreen extends Screen {
                 context.drawItem(fishStack, leftPos + 2, topPos + 4);
             }
 
-            float bobberY = 146 - this.barHeight + (float) minigame.getBobberPos() / 106.0F * (this.barHeight - 142);
+            int barHeight = minigame.getBarHeight();
+            float bobberY = minigame.getBarTopPixel();
             int barX = leftPos + 18;
             int barTopY = (int) (topPos + bobberY);
-            int midTiles = (this.barHeight - 24) / 2;
+            int midTiles = (barHeight - 24) / 2;
             context.drawTexture(RenderPipelines.GUI_TEXTURED, GREENBAR, barX, barTopY, 38.0f, 0.0f, 8, 12, 256, 256);
             for (int i = 0; i < midTiles; i++) {
                 context.drawTexture(RenderPipelines.GUI_TEXTURED, GREENBAR, barX, barTopY + 12 + i * 2, 0.0f, 0.0f, 8, 2, 256, 256);

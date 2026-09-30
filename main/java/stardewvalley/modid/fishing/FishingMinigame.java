@@ -14,6 +14,12 @@ public class FishingMinigame {
     private static final int MAX_BOBBER_HEIGHT = 106;
     private static final int MAX_FISH_HEIGHT = FishBehavior.MAX_HEIGHT;
 
+    // 面板内的渲染像素基准（必须与 FishingScreen.render 的绘制公式保持一致）
+    public static final float FISH_RENDER_HEIGHT = 16f;
+    private static final float FISH_TOP_BASE = 130f;
+    private static final float BAR_TOP_BASE = 146f;
+    private static final float BAR_RANGE = 142f;
+
     private final Random random = new Random();
     private final FishingScreen screen;
     private final FishBehavior behavior;
@@ -118,9 +124,16 @@ public class FishingMinigame {
         this.bobberMaxOffset = barHeight - 2;
     }
 
-    // 倒刺钩：鱼在绿色条内时，使绿色条跟随鱼移动（滞后200ms ≈ 4 ticks）
-    private double barbedHookTargetOffset = 0;
-    private double barbedHookCurrentOffset = 0;
+    // 倒刺钩：鱼在绿色条内时，使绿色条跟随鱼移动（滞后200ms ≈ 4 ticks），单位为像素
+    private double barbedHookTargetOffsetPx = 0;
+    private double barbedHookCurrentOffsetPx = 0;
+
+    // 鱼/宝箱在屏幕上的渲染高度（像素），由 FishingScreen 按实际绘制高度设置
+    private float fishRenderHeight = FISH_RENDER_HEIGHT;
+
+    public void setFishRenderHeight(float height) {
+        this.fishRenderHeight = height;
+    }
 
     public void tick(boolean mouseDown) {
         if (mouseDown) {
@@ -183,34 +196,24 @@ public class FishingMinigame {
             fishIsIdle = true;
         }
 
-        // 倒刺钩：计算绿色条偏移跟随鱼
+        // 判定与渲染严格统一：使用“屏幕像素矩形”，看到的范围就是判定范围
+        int barHeight = getBarHeight();
+        float barTopBase = getBarTopPixelBase();
+
+        // 倒刺钩：鱼在条内时，让绿条中心平滑对准鱼中心
         if (hasBarbedHook) {
-            int barHeight = getBobberBarHeight(fishingLevel) + extraBarHeight;
-            int min = MathHelper.floor(bobberPos) - 2;
-            int max = MathHelper.ceil(bobberPos) + barHeight - 2;
-            boolean fishInBar = fishPos >= min && fishPos <= max;
-            if (fishInBar) {
-                // 鱼在条内：目标是让条的中心对准鱼的位置
-                double barCenter = bobberPos + (double) barHeight / 2;
-                double targetOffset = fishPos - barCenter;
-                barbedHookTargetOffset = targetOffset;
+            float fishTop = getTopPixel(fishPos);
+            if (overlaps(fishTop, fishRenderHeight, barTopBase, barHeight)) {
+                barbedHookTargetOffsetPx = (fishTop + fishRenderHeight / 2f) - (barTopBase + barHeight / 2f);
             }
             // 平滑跟随（滞后约4tick ≈ 200ms）
-            barbedHookCurrentOffset += (barbedHookTargetOffset - barbedHookCurrentOffset) * 0.2;
+            barbedHookCurrentOffsetPx += (barbedHookTargetOffsetPx - barbedHookCurrentOffsetPx) * 0.2;
         }
 
-        int barHeight = getBobberBarHeight(fishingLevel) + extraBarHeight;
-        int effectiveMin = MathHelper.floor(bobberPos) - 2;
-        int effectiveMax = MathHelper.ceil(bobberPos) + barHeight - 2;
-
-        if (hasBarbedHook) {
-            double shift = barbedHookCurrentOffset;
-            effectiveMin += (int) Math.round(shift);
-            effectiveMax += (int) Math.round(shift);
-        }
+        float barTop = getBarTopPixel();
 
         boolean wasOnFish = bobberOnFish;
-        bobberOnFish = fishPos >= effectiveMin && fishPos <= effectiveMax;
+        bobberOnFish = overlaps(getTopPixel(fishPos), fishRenderHeight, barTop, barHeight);
 
         totalTicks++;
         if (bobberOnFish) {
@@ -248,9 +251,7 @@ public class FishingMinigame {
 
         // 宝箱进度
         if (hasChest && !chestObtained) {
-            int chestMin = effectiveMin;
-            int chestMax = effectiveMax;
-            boolean chestInBar = chestPos >= chestMin && chestPos <= chestMax;
+            boolean chestInBar = overlaps(getTopPixel(chestPos), FISH_RENDER_HEIGHT, barTop, barHeight);
 
             if (chestInBar) {
                 chestProgress += 4.0F / 3.0F;
@@ -272,6 +273,32 @@ public class FishingMinigame {
         if (points <= 0) {
             screen.setResult(false, 0);
         }
+    }
+
+    /** 绿条（绿色判定条）的像素高度 */
+    public int getBarHeight() {
+        return getBobberBarHeight(fishingLevel) + extraBarHeight;
+    }
+
+    /** 逻辑位置 → 该物体在面板内的渲染像素顶部（与 FishingScreen 的绘制公式一致） */
+    private static float getTopPixel(double pos) {
+        return FISH_TOP_BASE - (float) pos;
+    }
+
+    /** 绿条在面板内的像素顶部（不含倒刺钩偏移） */
+    private float getBarTopPixelBase() {
+        int barHeight = getBarHeight();
+        return BAR_TOP_BASE - barHeight + (float) bobberPos / MAX_BOBBER_HEIGHT * (barHeight - BAR_RANGE);
+    }
+
+    /** 绿条在面板内的像素顶部（含倒刺钩偏移），渲染与判定共用同一值 */
+    public float getBarTopPixel() {
+        return getBarTopPixelBase() + (hasBarbedHook ? (float) barbedHookCurrentOffsetPx : 0f);
+    }
+
+    /** 两个一维像素区间 [top, top+height] 是否相交 */
+    private static boolean overlaps(float aTop, float aHeight, float bTop, float bHeight) {
+        return aTop <= bTop + bHeight && aTop + aHeight >= bTop;
     }
 
     public float getBobberPos() { return (float) bobberPos; }
