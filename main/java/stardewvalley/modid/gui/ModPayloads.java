@@ -851,54 +851,7 @@ public class ModPayloads {
         public CustomPayload.Id<? extends CustomPayload> getId() { return ID; }
     }
 
-    // ====== 垃圾桶系统 ======
-
-    /** 客户端→服务端：垃圾桶操作 (0=放入/交换, 1=取出) */
-    public record TrashCanActionC2SPayload(int action, String itemId, int count, int oldItemValue, int oldItemCount) implements CustomPayload {
-        public static final CustomPayload.Id<TrashCanActionC2SPayload> ID = new CustomPayload.Id<>(
-            Identifier.of(StardewValley.MOD_ID, "trashcan_action")
-        );
-        public static final PacketCodec<PacketByteBuf, TrashCanActionC2SPayload> CODEC = PacketCodec.of(
-            (value, buf) -> { buf.writeInt(value.action); buf.writeString(value.itemId); buf.writeInt(value.count); buf.writeInt(value.oldItemValue); buf.writeInt(value.oldItemCount); },
-            buf -> new TrashCanActionC2SPayload(buf.readInt(), buf.readString(), buf.readInt(), buf.readInt(), buf.readInt())
-        );
-        @Override public CustomPayload.Id<? extends CustomPayload> getId() { return ID; }
-    }
-
-    /** 服务端→客户端：垃圾桶回收结果同步 */
-    public record TrashCanSyncS2CPayload(int earnedGold) implements CustomPayload {
-        public static final CustomPayload.Id<TrashCanSyncS2CPayload> ID = new CustomPayload.Id<>(
-            Identifier.of(StardewValley.MOD_ID, "trashcan_sync")
-        );
-        public static final PacketCodec<PacketByteBuf, TrashCanSyncS2CPayload> CODEC = PacketCodec.of(
-            (value, buf) -> buf.writeInt(value.earnedGold),
-            buf -> new TrashCanSyncS2CPayload(buf.readInt())
-        );
-        @Override public CustomPayload.Id<? extends CustomPayload> getId() { return ID; }
-    }
-
-    /** 服务端→客户端：垃圾桶当前物品数据同步 */
-    public record TrashCanDataSyncS2CPayload(String itemId, int count, int earnedGold) implements CustomPayload {
-        public static final CustomPayload.Id<TrashCanDataSyncS2CPayload> ID = new CustomPayload.Id<>(
-            Identifier.of(StardewValley.MOD_ID, "trashcan_data_sync")
-        );
-        public static final PacketCodec<PacketByteBuf, TrashCanDataSyncS2CPayload> CODEC = PacketCodec.of(
-            (value, buf) -> { buf.writeString(value.itemId()); buf.writeInt(value.count()); buf.writeInt(value.earnedGold()); },
-            buf -> new TrashCanDataSyncS2CPayload(buf.readString(), buf.readInt(), buf.readInt())
-        );
-        @Override public CustomPayload.Id<? extends CustomPayload> getId() { return ID; }
-    }
-
-    /** 客户端→服务端：请求垃圾桶当前物品数据 */
-    public record TrashCanDataRequestC2SPayload() implements CustomPayload {
-        public static final CustomPayload.Id<TrashCanDataRequestC2SPayload> ID = new CustomPayload.Id<>(
-            Identifier.of(StardewValley.MOD_ID, "trashcan_data_req")
-        );
-        public static final PacketCodec<PacketByteBuf, TrashCanDataRequestC2SPayload> CODEC = PacketCodec.of(
-            (v, b) -> {}, b -> new TrashCanDataRequestC2SPayload()
-        );
-        @Override public CustomPayload.Id<? extends CustomPayload> getId() { return ID; }
-    }
+    // ====== 垃圾桶（槽位内容由 PlayerScreenHandler 自动同步） ======
 
     // ====== 垃圾桶升级 ======
 

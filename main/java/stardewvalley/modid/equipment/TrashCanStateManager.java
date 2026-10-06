@@ -3,6 +3,7 @@ package stardewvalley.modid.equipment;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.datafixer.DataFixTypes;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateType;
@@ -12,40 +13,33 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/** 垃圾桶升级等级（0=无, 1=铜, 2=铁, 3=金, 4=铱）+ 玩家级暂存物品 */
+/** 垃圾桶升级等级（0=无, 1=铜, 2=铁, 3=金, 4=铱）+ 玩家级暂存物品（完整 ItemStack，保留组件） */
 public class TrashCanStateManager extends PersistentState {
     private static final String NAME = "stardewvalley_trashcan";
 
     private int level = 0;
-    /** playerUUID -> (itemId, count) */
-    private final Map<UUID, PendingItem> pendingItems = new HashMap<>();
+    /** playerUUID -> 垃圾桶暂存物品 */
+    private final Map<UUID, ItemStack> trashStacks = new HashMap<>();
 
-    public static class PendingItem {
-        public String itemId = "";
-        public int count = 0;
-        public PendingItem() {}
-        public PendingItem(String itemId, int count) { this.itemId = itemId; this.count = count; }
-    }
+    private record SaveData(int level, Map<UUID, ItemStack> items) {}
 
-    private record SaveData(int level, Map<UUID, PendingItem> items) {}
-    private static final Codec<PendingItem> ITEM_CODEC = RecordCodecBuilder.create(inst ->
-        inst.group(
-            Codec.STRING.fieldOf("itemId").forGetter(p -> p.itemId),
-            Codec.INT.fieldOf("count").forGetter(p -> p.count)
-        ).apply(inst, PendingItem::new)
-    );
-    private static final Codec<Map<UUID, PendingItem>> ITEMS_CODEC = Codec.unboundedMap(
-        Codec.STRING.xmap(UUID::fromString, UUID::toString), ITEM_CODEC
+    private static final Codec<Map<UUID, ItemStack>> ITEMS_CODEC = Codec.unboundedMap(
+        Codec.STRING.xmap(UUID::fromString, UUID::toString), ItemStack.OPTIONAL_CODEC
     );
     private static final Codec<SaveData> SAVE_CODEC = RecordCodecBuilder.create(inst ->
         inst.group(
             Codec.INT.fieldOf("level").forGetter(d -> d.level),
-            ITEMS_CODEC.optionalFieldOf("pendingItems", Map.of()).forGetter(d -> d.items)
+            ITEMS_CODEC.optionalFieldOf("trashItems", Map.of()).forGetter(d -> d.items)
         ).apply(inst, SaveData::new)
     );
     public static final Codec<TrashCanStateManager> CODEC = SAVE_CODEC.xmap(
-        d -> { TrashCanStateManager m = new TrashCanStateManager(); m.level = d.level; m.pendingItems.putAll(d.items); return m; },
-        m -> new SaveData(m.level, new HashMap<>(m.pendingItems))
+        d -> {
+            TrashCanStateManager m = new TrashCanStateManager();
+            m.level = d.level;
+            m.trashStacks.putAll(d.items);
+            return m;
+        },
+        m -> new SaveData(m.level, new HashMap<>(m.trashStacks))
     );
     public static final PersistentStateType<TrashCanStateManager> TYPE = new PersistentStateType<>(
         NAME, TrashCanStateManager::new, SafeCodec.wrap(CODEC, TrashCanStateManager::new), DataFixTypes.LEVEL
@@ -65,21 +59,17 @@ public class TrashCanStateManager extends PersistentState {
 
     // === 玩家暂存物品 ===
 
-    public PendingItem getPendingItem(UUID playerUuid) {
-        return pendingItems.getOrDefault(playerUuid, new PendingItem());
+    public ItemStack getTrashStack(UUID playerUuid) {
+        ItemStack stack = trashStacks.get(playerUuid);
+        return stack == null ? ItemStack.EMPTY : stack.copy();
     }
 
-    public void setPendingItem(UUID playerUuid, String itemId, int count) {
-        if (count <= 0 || itemId.isEmpty()) {
-            pendingItems.remove(playerUuid);
+    public void setTrashStack(UUID playerUuid, ItemStack stack) {
+        if (stack == null || stack.isEmpty()) {
+            trashStacks.remove(playerUuid);
         } else {
-            pendingItems.put(playerUuid, new PendingItem(itemId, count));
+            trashStacks.put(playerUuid, stack.copy());
         }
-        setDirty(true);
-    }
-
-    public void clearPendingItem(UUID playerUuid) {
-        pendingItems.remove(playerUuid);
         setDirty(true);
     }
 }

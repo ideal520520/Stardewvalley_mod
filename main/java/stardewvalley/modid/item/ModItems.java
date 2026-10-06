@@ -1362,79 +1362,11 @@ public class ModItems {
         Registry.register(Registries.ITEM, cheeseKey, cheeseItem);
         ITEMS.put("cheese", cheeseItem);
 
-        // mayonnaise - 可食用
-        RawFoodData mayonnaiseFood = new RawFoodData(50, 22, 190);
-        FoodData mayonnaiseFd = calcFood(mayonnaiseFood.stamina(), mayonnaiseFood.healValue(), mayonnaiseFood.moneyValue());
-        Identifier mayonnaiseId = Identifier.of(StardewValley.MOD_ID, "mayonnaise");
-        RegistryKey<Item> mayonnaiseKey = RegistryKey.of(RegistryKeys.ITEM, mayonnaiseId);
-        Item mayonnaiseItem = new DishItem(new Item.Settings().registryKey(mayonnaiseKey).maxCount(999).food(
-            new FoodComponent.Builder()
-                .nutrition(mayonnaiseFd.nutrition())
-                .saturationModifier(mayonnaiseFd.saturationModifier())
-                .alwaysEdible()
-                .build()
-        ), mayonnaiseFd.healAmount());
-        Registry.register(Registries.ITEM, mayonnaiseKey, mayonnaiseItem);
-        ITEMS.put("mayonnaise", mayonnaiseItem);
-
-        // void_mayonnaise - 可食用(负面效果，使用CropItem应用exhaustion)
-        RawFoodData voidMayonnaiseFood = new RawFoodData(-75, 0, 275);
-        FoodData voidMayonnaiseFd = calcFood(voidMayonnaiseFood.stamina(), voidMayonnaiseFood.healValue(), voidMayonnaiseFood.moneyValue());
-        Identifier voidMayonnaiseId = Identifier.of(StardewValley.MOD_ID, "void_mayonnaise");
-        RegistryKey<Item> voidMayonnaiseKey = RegistryKey.of(RegistryKeys.ITEM, voidMayonnaiseId);
-        CropItem voidMayonnaiseItem = new CropItem(
-            new Item.Settings().registryKey(voidMayonnaiseKey).maxCount(999).food(
-                new FoodComponent.Builder()
-                    .nutrition(voidMayonnaiseFd.nutrition())
-                    .saturationModifier(voidMayonnaiseFd.saturationModifier())
-                    .alwaysEdible()
-                    .build()),
-            0.0f,
-            voidMayonnaiseFood.moneyValue(),
-            CropQuality.NORMAL,
-            voidMayonnaiseFd.exhaustion()
-        );
-        Registry.register(Registries.ITEM, voidMayonnaiseKey, voidMayonnaiseItem);
-        ITEMS.put("void_mayonnaise", voidMayonnaiseItem);
-
-        // duck_mayonnaise - 可食用
-        RawFoodData duckMayoFood = new RawFoodData(75, 33, 375);
-        FoodData duckMayoFd = calcFood(duckMayoFood.stamina(), duckMayoFood.healValue(), duckMayoFood.moneyValue());
-        Identifier duckMayoId = Identifier.of(StardewValley.MOD_ID, "duck_mayonnaise");
-        RegistryKey<Item> duckMayoKey = RegistryKey.of(RegistryKeys.ITEM, duckMayoId);
-        Item duckMayoItem = new DishItem(new Item.Settings().registryKey(duckMayoKey).maxCount(999).food(
-            new FoodComponent.Builder().nutrition(duckMayoFd.nutrition()).saturationModifier(duckMayoFd.saturationModifier()).alwaysEdible().build()
-        ), duckMayoFd.healAmount());
-        Registry.register(Registries.ITEM, duckMayoKey, duckMayoItem);
-        ITEMS.put("duck_mayonnaise", duckMayoItem);
-
-        // gold_mayonnaise - 金星蛋黄酱
-        RawFoodData goldMayoFood = new RawFoodData(100, 44, 475);
-        FoodData goldMayoFd = calcFood(goldMayoFood.stamina(), goldMayoFood.healValue(), goldMayoFood.moneyValue());
-        Identifier goldMayoId = Identifier.of(StardewValley.MOD_ID, "gold_mayonnaise");
-        RegistryKey<Item> goldMayoKey = RegistryKey.of(RegistryKeys.ITEM, goldMayoId);
-        Item goldMayoItem = new DishItem(new Item.Settings().registryKey(goldMayoKey).maxCount(999).food(
-            new FoodComponent.Builder().nutrition(goldMayoFd.nutrition()).saturationModifier(goldMayoFd.saturationModifier()).alwaysEdible().build()
-        ), goldMayoFd.healAmount());
-        Registry.register(Registries.ITEM, goldMayoKey, goldMayoItem);
-        ITEMS.put("gold_mayonnaise", goldMayoItem);
-
-        // dinosaur_mayonnaise - 由恐龙蛋在蛋黄酱机加工
-        RawFoodData dinoMayoFood = new RawFoodData(125, 56, 350);
-        FoodData dinoMayoFd = calcFood(dinoMayoFood.stamina(), dinoMayoFood.healValue(), dinoMayoFood.moneyValue());
-        Identifier dinoMayoId = Identifier.of(StardewValley.MOD_ID, "dinosaur_mayonnaise");
-        RegistryKey<Item> dinoMayoKey = RegistryKey.of(RegistryKeys.ITEM, dinoMayoId);
-        ArtisanItem dinoMayoItem = new ArtisanItem(
-            new Item.Settings().registryKey(dinoMayoKey).maxCount(999)
-                .food(new FoodComponent.Builder()
-                    .nutrition(dinoMayoFd.nutrition())
-                    .saturationModifier(dinoMayoFd.saturationModifier())
-                    .alwaysEdible()
-                    .build()),
-            dinoMayoFood.stamina(), dinoMayoFd.healAmount(), dinoMayoFood.moneyValue(), true, false
-        );
-        Registry.register(Registries.ITEM, dinoMayoKey, dinoMayoItem);
-        ITEMS.put("dinosaur_mayonnaise", dinoMayoItem);
+        // 蛋黄酱家族：普通/银/金/铱，按 CropQuality 倍率缩放体力、血量、售价
+        registerMayonnaiseFamily("mayonnaise", "mayonnaise_silver", "mayonnaise_gold", "mayonnaise_iridium", 50, 22, 190);
+        registerMayonnaiseFamily("void_mayonnaise", "void_mayonnaise_silver", "void_mayonnaise_gold", "void_mayonnaise_iridium", -75, 0, 275);
+        registerMayonnaiseFamily("duck_mayonnaise", "duck_mayonnaise_silver", "duck_mayonnaise_gold", "duck_mayonnaise_iridium", 75, 33, 375);
+        registerMayonnaiseFamily("dinosaur_mayonnaise", "dinosaur_mayonnaise_silver", "dinosaur_mayonnaise_gold", "dinosaur_mayonnaise_iridium", 125, 56, 350);
 
         // truffle_oil - 由松露在产油机加工
         Identifier truffleOilId = Identifier.of(StardewValley.MOD_ID, "truffle_oil");
@@ -1464,6 +1396,37 @@ public class ModItems {
 
         // 各种蜂蜜（均不可食用）
         registerHoneyItems();
+    }
+
+    /** 蛋黄酱家族的 4 个星级（普通/银/金/铱），按 CropQuality 倍率缩放体力、血量、售价；负体力时靠 exhaustion 表现负面效果 */
+    private static void registerMayonnaiseFamily(String normal, String silver, String gold, String iridium,
+                                                 int baseStamina, int baseHealth, int basePrice) {
+        String[] names = {normal, silver, gold, iridium};
+        CropQuality[] qualities = CropQuality.values();
+        for (int i = 0; i < qualities.length; i++) {
+            CropQuality quality = qualities[i];
+            Identifier id = Identifier.of(StardewValley.MOD_ID, names[i]);
+            RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, id);
+            FoodData food = calcFood(
+                Math.round(baseStamina * quality.getHealMultiplier()),
+                Math.round(baseHealth * quality.getHealMultiplier()),
+                Math.round(basePrice * quality.getMoneyMultiplier())
+            );
+            CropItem item = new CropItem(
+                new Item.Settings().registryKey(key).maxCount(999).food(
+                    new FoodComponent.Builder()
+                        .nutrition(food.nutrition())
+                        .saturationModifier(food.saturationModifier())
+                        .alwaysEdible()
+                        .build()),
+                baseHealth / 5.0f,
+                basePrice,
+                quality,
+                food.exhaustion()
+            );
+            Registry.register(Registries.ITEM, key, item);
+            ITEMS.put(names[i], item);
+        }
     }
 
     private static void registerHoneyItems() {
@@ -1530,21 +1493,6 @@ public class ModItems {
             }
         }
 
-        // 蛋黄酱品质变体使用 ArtisanItem
-        registerArtisanItem("void_mayonnaise_silver", ArtisanItem.ArtisanType.JELLY, -75, 0, 275, true, 1);
-        registerArtisanItem("void_mayonnaise_gold", ArtisanItem.ArtisanType.JELLY, -75, 0, 275, true, 2);
-        registerArtisanItem("void_mayonnaise_iridium", ArtisanItem.ArtisanType.JELLY, -75, 0, 275, true, 3);
-        registerArtisanItem("dinosaur_mayonnaise_silver", ArtisanItem.ArtisanType.JELLY, 125, 56, 350, true, 1);
-        registerArtisanItem("dinosaur_mayonnaise_gold", ArtisanItem.ArtisanType.JELLY, 125, 56, 350, true, 2);
-        registerArtisanItem("dinosaur_mayonnaise_iridium", ArtisanItem.ArtisanType.JELLY, 125, 56, 350, true, 3);
-
-        // 蛋黄酱品质变体（银和铱，金品质已有 gold_mayonnaise）
-        registerArtisanItem("mayonnaise_silver", ArtisanItem.ArtisanType.JELLY, 50, 22, 190, true, 1);
-        registerArtisanItem("mayonnaise_iridium", ArtisanItem.ArtisanType.JELLY, 50, 22, 190, true, 3);
-        // 鸭蛋黄酱品质变体
-        registerArtisanItem("duck_mayonnaise_silver", ArtisanItem.ArtisanType.JELLY, 75, 33, 375, true, 1);
-        registerArtisanItem("duck_mayonnaise_gold", ArtisanItem.ArtisanType.JELLY, 75, 33, 375, true, 2);
-        registerArtisanItem("duck_mayonnaise_iridium", ArtisanItem.ArtisanType.JELLY, 75, 33, 375, true, 3);
     }
 
     private static void registerBaitAndTackleItems() {

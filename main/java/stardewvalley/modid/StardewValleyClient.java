@@ -407,28 +407,14 @@ public class StardewValleyClient implements ClientModInitializer {
             });
         });
 
-        // 接收垃圾桶数据同步（服务端操作后回复）
-        ClientPlayNetworking.registerGlobalReceiver(ModPayloads.TrashCanDataSyncS2CPayload.ID, (payload, context) -> {
-            context.client().execute(() -> {
-                String itemId = payload.itemId();
-                int count = payload.count();
-                if (itemId.isEmpty() || count <= 0) {
-                    ClientTrashCanData.clear();
-                } else {
-                    Identifier id = Identifier.of(itemId);
-                    net.minecraft.item.Item item = net.minecraft.registry.Registries.ITEM.get(id);
-                    if (item != null && item != net.minecraft.item.Items.AIR) {
-                        ClientTrashCanData.setPendingItem(new net.minecraft.item.ItemStack(item, count));
-                    }
-                }
-                // 操作后请求刷新库存界面
-            });
-        });
-
         // 接收垃圾桶等级同步
         ClientPlayNetworking.registerGlobalReceiver(ModPayloads.TrashCanLevelSyncS2CPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
                 ClientTrashCanData.setTrashLevel(payload.level());
+                net.minecraft.client.MinecraftClient mc = net.minecraft.client.MinecraftClient.getInstance();
+                if (mc.player != null && mc.player.playerScreenHandler instanceof stardewvalley.modid.gui.PlayerScreenHandlerAccessor acc) {
+                    acc.sv$getTrashSlot().setEnabled(payload.level() > 0);
+                }
             });
         });
 

@@ -104,8 +104,8 @@ public enum MachineType {
         if (data.count < 1) return null;
         String baseName = getBaseCropName(data.inputId);
         if (baseName.equals("egg") || baseName.equals("brown_egg")) return new RecipeResult("mayonnaise", minToTicks(180), 1, 1);
-        if (baseName.equals("large_egg") || baseName.equals("large_brown_egg")) return new RecipeResult("gold_mayonnaise", minToTicks(180), 3, 1);
-        if (baseName.equals("gold_egg")) return new RecipeResult("gold_mayonnaise", minToTicks(180), 3, 1);
+        if (baseName.equals("large_egg") || baseName.equals("large_brown_egg")) return new RecipeResult("mayonnaise_gold", minToTicks(180), 3, 1);
+        if (baseName.equals("gold_egg")) return new RecipeResult("mayonnaise_gold", minToTicks(180), 3, 1);
         if (baseName.equals("void_egg")) return new RecipeResult("void_mayonnaise", minToTicks(180), 1, 1);
         if (baseName.equals("duck_egg")) return new RecipeResult("duck_mayonnaise", minToTicks(180), 1, 1);
         if (baseName.equals("dinosaur_egg")) return new RecipeResult("dinosaur_mayonnaise", minToTicks(180), 1, 1);
@@ -511,8 +511,6 @@ public enum MachineType {
         if (path.endsWith("_gold")) {
             String base = path.substring(0, path.length() - "_gold".length());
             if (!agingMap.containsKey(base)) return null;
-            // 特殊处理：mayonnaise_gold 不存在，使用 gold_mayonnaise
-            if (base.equals("mayonnaise")) return namespace + "mayonnaise_iridium";
             return namespace + base + "_iridium";
         }
 
@@ -520,15 +518,7 @@ public enum MachineType {
         if (path.endsWith("_silver")) {
             String base = path.substring(0, path.length() - "_silver".length());
             if (!agingMap.containsKey(base)) return null;
-            // 特殊处理：mayonnaise_gold 不存在，跳转到 gold_mayonnaise
-            if (base.equals("mayonnaise")) return namespace + "gold_mayonnaise";
             return namespace + base + "_gold";
-        }
-
-        // 处理 gold_mayonnaise 特殊命名（已是金星品质，陈酿到铱星）
-        if (path.equals("gold_mayonnaise")) {
-            if (!agingMap.containsKey("mayonnaise")) return null;
-            return namespace + "mayonnaise_iridium";
         }
 
         // 普通品质
@@ -563,7 +553,6 @@ public enum MachineType {
             // 总天数: silver=3, gold=7, iridium=14
             if (path.endsWith("_silver")) return 4 * 24000;   // 3→7 还需4天
             if (path.endsWith("_gold")) return 7 * 24000;     // 7→14 还需7天
-            if (path.equals("gold_mayonnaise")) return 7 * 24000; // gold_mayonnaise→iridium 需7天
             return 3 * 24000;                                   // normal→3 需3天
         }
         return 14 * 24000;

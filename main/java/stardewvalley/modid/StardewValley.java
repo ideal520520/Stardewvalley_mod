@@ -287,11 +287,7 @@ public class StardewValley implements ModInitializer {
         PayloadTypeRegistry.playC2S().register(ModPayloads.EquipmentActionC2SPayload.ID, ModPayloads.EquipmentActionC2SPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(ModPayloads.EquipmentSyncS2CPayload.ID, ModPayloads.EquipmentSyncS2CPayload.CODEC);
 
-        // 垃圾桶
-        PayloadTypeRegistry.playC2S().register(ModPayloads.TrashCanActionC2SPayload.ID, ModPayloads.TrashCanActionC2SPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(ModPayloads.TrashCanSyncS2CPayload.ID, ModPayloads.TrashCanSyncS2CPayload.CODEC);
-        PayloadTypeRegistry.playC2S().register(ModPayloads.TrashCanDataRequestC2SPayload.ID, ModPayloads.TrashCanDataRequestC2SPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(ModPayloads.TrashCanDataSyncS2CPayload.ID, ModPayloads.TrashCanDataSyncS2CPayload.CODEC);
+        // 垃圾桶（槽位由 PlayerScreenHandler 自动同步，仅保留等级/升级相关包）
         PayloadTypeRegistry.playC2S().register(ModPayloads.TrashCanLevelRequestC2SPayload.ID, ModPayloads.TrashCanLevelRequestC2SPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(ModPayloads.TrashCanLevelSyncS2CPayload.ID, ModPayloads.TrashCanLevelSyncS2CPayload.CODEC);
         PayloadTypeRegistry.playC2S().register(ModPayloads.TrashCanUpgradeC2SPayload.ID, ModPayloads.TrashCanUpgradeC2SPayload.CODEC);
@@ -702,6 +698,7 @@ public class StardewValley implements ModInitializer {
 								tsm.setLevel(nextLevel);
 								for (ServerPlayerEntity p : context.server().getPlayerManager().getPlayerList()) {
 									ServerPlayNetworking.send(p, new ModPayloads.TrashCanLevelSyncS2CPayload(tsm.getLevel()));
+									setTrashSlotEnabled(p, tsm.getLevel());
 								}
 							} else {
 								String itemName = entry.targetTier + "_" + entry.toolType;
@@ -1520,8 +1517,7 @@ public class StardewValley implements ModInitializer {
 				EquipmentStateManager stateManager = EquipmentStateManager.get(world);
 				EquipmentInventory inv = stateManager.getPlayerData(player.getUuid());
 				syncEquipment(player, inv);
-				TrashCanStateManager tsm = TrashCanStateManager.get(world);
-				ServerPlayNetworking.send(player, new ModPayloads.TrashCanLevelSyncS2CPayload(tsm.getLevel()));
+				initTrashCanForPlayer(player);
 			});
 		});
 
@@ -1589,94 +1585,32 @@ public class StardewValley implements ModInitializer {
 
 	// ====== 垃圾桶服务器处理器 ======
 
+	/** 更新服务端玩家垃圾桶真实槽位的启用状态（等级>0 时才可用） */
+	private static void setTrashSlotEnabled(ServerPlayerEntity player, int level) {
+		if (player.playerScreenHandler instanceof stardewvalley.modid.gui.PlayerScreenHandlerAccessor acc) {
+			acc.sv$getTrashSlot().setEnabled(level > 0);
+		}
+	}
+
+	/** 初始化某玩家的垃圾桶真实槽位：加载暂存物品、绑定持久化、同步等级与内容 */
+	private static void initTrashCanForPlayer(ServerPlayerEntity player) {
+		ServerWorld world = (ServerWorld) player.getEntityWorld();
+		TrashCanStateManager tsm = TrashCanStateManager.get(world);
+		ServerPlayNetworking.send(player, new ModPayloads.TrashCanLevelSyncS2CPayload(tsm.getLevel()));
+		if (player.playerScreenHandler instanceof stardewvalley.modid.gui.PlayerScreenHandlerAccessor acc) {
+			net.minecraft.inventory.SimpleInventory trashInv = acc.sv$getTrashInventory();
+			trashInv.setStack(0, tsm.getTrashStack(player.getUuid()));
+			trashInv.addListener(inv -> tsm.setTrashStack(player.getUuid(), inv.getStack(0)));
+			acc.sv$getTrashSlot().setEnabled(tsm.getLevel() > 0);
+			player.playerScreenHandler.sendContentUpdates();
+		}
+	}
+
 	private void registerTrashCanHandler() {
-		// 数据请求
-		ServerPlayNetworking.registerGlobalReceiver(ModPayloads.TrashCanDataRequestC2SPayload.ID, (payload, context) -> {
-			context.server().execute(() -> {
-				ServerPlayerEntity player = context.player();
-				ServerWorld world = (ServerWorld) player.getEntityWorld();
-				TrashCanStateManager state = TrashCanStateManager.get(world);
-				if (state.getLevel() <= 0) return;
-				TrashCanStateManager.PendingItem pi = state.getPendingItem(player.getUuid());
-				ServerPlayNetworking.send(player, new ModPayloads.TrashCanDataSyncS2CPayload(pi.itemId, pi.count, 0));
-			});
-		});
-		// 操作处理器
-		ServerPlayNetworking.registerGlobalReceiver(ModPayloads.TrashCanActionC2SPayload.ID, (payload, context) -> {
-			context.server().execute(() -> {
-				ServerPlayerEntity player = context.player();
-				ServerWorld world = (ServerWorld) player.getEntityWorld();
-				TrashCanStateManager state = TrashCanStateManager.get(world);
-				int level = state.getLevel();
-				if (level <= 0) return;
-				double rate = TrashCanStateManager.getRecycleRate(level);
-				UUID uuid = player.getUuid();
-
-				if (payload.action() == 0) {
-					// PUT / MERGE / REPLACE — 物品放入
-					String incomingItemId = payload.itemId();
-					int incomingCount = payload.count();
-					if (incomingItemId.isEmpty() || incomingCount <= 0) return;
-					Identifier incomingId = Identifier.of(incomingItemId);
-					net.minecraft.item.Item item = Registries.ITEM.get(incomingId);
-					if (item == null || item == Items.AIR) return;
-
-					// 清除服务端光标，防止与服务端不同步导致点击背包格子时装回物品
-					player.currentScreenHandler.setCursorStack(ItemStack.EMPTY);
-
-					TrashCanStateManager.PendingItem pi = state.getPendingItem(uuid);
-					int earned = 0;
-
-					if (pi.itemId.isEmpty()) {
-						// 空桶 → 直接存入，不给gold
-						state.setPendingItem(uuid, incomingItemId, incomingCount);
-					} else if (pi.itemId.equals(incomingItemId)) {
-						// 同种 → 合并，不超过999
-						int total = pi.count + incomingCount;
-						if (total > 999) {
-							int overflow = total - 999;
-							pi.count = 999;
-							// 超出部分回到玩家背包
-							ItemStack overflowStack = new ItemStack(item, overflow);
-							player.getInventory().offerOrDrop(overflowStack);
-						} else {
-							pi.count = total;
-						}
-						state.setPendingItem(uuid, incomingItemId, pi.count);
-					} else {
-						// 不同种 → 旧物品回收给gold后删除，新物品存入（不给gold）
-						Identifier oldId = Identifier.of(pi.itemId);
-						int oldValue = GoldManager.getItemMoneyValue(oldId);
-						if (oldValue > 0 && pi.count > 0) {
-							earned = (int) (oldValue * pi.count * rate);
-						}
-						state.setPendingItem(uuid, incomingItemId, incomingCount);
-					}
-
-					if (earned > 0) {
-						GoldManager gm = GoldManager.get(world);
-						gm.addGold(earned);
-						// 同步gold到客户端
-						ServerPlayNetworking.send(player, new ModPayloads.GoldSyncS2CPayload(gm.getGold()));
-					}
-
-					TrashCanStateManager.PendingItem newPi = state.getPendingItem(uuid);
-					ServerPlayNetworking.send(player, new ModPayloads.TrashCanDataSyncS2CPayload(newPi.itemId, newPi.count, earned));
-				} else if (payload.action() == 1) {
-					// TAKE — 取出物品
-					TrashCanStateManager.PendingItem pi = state.getPendingItem(uuid);
-					if (!pi.itemId.isEmpty() && pi.count > 0) {
-						Identifier takeId = Identifier.of(pi.itemId);
-						net.minecraft.item.Item takeItem = Registries.ITEM.get(takeId);
-						if (takeItem != null && takeItem != Items.AIR) {
-							player.getInventory().offerOrDrop(new ItemStack(takeItem, pi.count));
-						}
-					}
-					state.clearPendingItem(uuid);
-					ServerPlayNetworking.send(player, new ModPayloads.TrashCanDataSyncS2CPayload("", 0, 0));
-				}
-			});
-		});
+		// 玩家重生会创建新的 PlayerScreenHandler，需要重新初始化垃圾桶槽位
+		net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents.AFTER_RESPAWN.register(
+			(oldPlayer, newPlayer, alive) -> initTrashCanForPlayer(newPlayer));
+		// 槽位内容由 PlayerScreenHandler 真实槽位自动同步，这里只处理等级与升级
 		// 等级请求
 		ServerPlayNetworking.registerGlobalReceiver(ModPayloads.TrashCanLevelRequestC2SPayload.ID, (payload, context) -> {
 			context.server().execute(() -> {
@@ -1702,6 +1636,7 @@ public class StardewValley implements ModInitializer {
 						state.setLevel(nextLevel);
 						for (ServerPlayerEntity p : context.server().getPlayerManager().getPlayerList()) {
 							ServerPlayNetworking.send(p, new ModPayloads.TrashCanLevelSyncS2CPayload(state.getLevel()));
+							setTrashSlotEnabled(p, state.getLevel());
 						}
 					}
 					return;

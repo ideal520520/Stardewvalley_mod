@@ -523,9 +523,9 @@ public final class CraftingMaterialSets {
         artisan.addAll(ANY_PICKLE);
         artisan.addAll(ANY_SMOKED_FISH);
         artisan.addAll(Arrays.asList(
-            "mayonnaise", "duck_mayonnaise", "gold_mayonnaise", "void_mayonnaise", "dinosaur_mayonnaise",
+            "mayonnaise", "duck_mayonnaise", "mayonnaise_gold", "void_mayonnaise", "dinosaur_mayonnaise",
             "mayonnaise_silver", "duck_mayonnaise_silver", "void_mayonnaise_silver", "dinosaur_mayonnaise_silver",
-            "mayonnaise_gold", "duck_mayonnaise_gold", "void_mayonnaise_gold", "dinosaur_mayonnaise_gold",
+            "duck_mayonnaise_gold", "void_mayonnaise_gold", "dinosaur_mayonnaise_gold",
             "mayonnaise_iridium", "duck_mayonnaise_iridium", "void_mayonnaise_iridium", "dinosaur_mayonnaise_iridium",
             "truffle_oil"
         ));

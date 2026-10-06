@@ -4,8 +4,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
-import net.minecraft.client.gui.screen.ingame.RecipeBookScreen;
-import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,10 +12,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import stardewvalley.modid.StardewValley;
 import stardewvalley.modid.equipment.ClientEquipmentData;
-import stardewvalley.modid.mixin.RecipeBookScreenAccessor;
 import stardewvalley.modid.equipment.ClientTrashCanData;
 import stardewvalley.modid.equipment.EquipmentInventory;
 import stardewvalley.modid.gui.ModPayloads;
+import stardewvalley.modid.gui.PlayerScreenHandlerAccessor;
+import stardewvalley.modid.gui.TrashSlot;
 
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenMixin {
@@ -30,35 +29,28 @@ public abstract class InventoryScreenMixin {
         Identifier.of(StardewValley.MOD_ID, "textures/gui/Trash_Can_Iridium.png"),
     };
     private static final Identifier TAB_TEXTURE = Identifier.of(StardewValley.MOD_ID, "textures/gui/Inventory_Tab.png");
-    private static final int TRASH_SLOT_X = 155;
-    private static final int TRASH_SLOT_Y = 62;
     private static final int TAB_SLOT_X = 137; // 垃圾桶左侧
     private static final int TAB_SLOT_Y = 62;
 
     @Inject(method = "init", at = @At("TAIL"))
     private void onInit(CallbackInfo ci) {
-        // 打开背包时请求垃圾桶数据
-        if (ClientTrashCanData.getTrashLevel() > 0) {
-            ClientPlayNetworking.send(new ModPayloads.TrashCanDataRequestC2SPayload());
+        // 打开背包时请求垃圾桶等级，并刷新垃圾桶槽位开关状态
+        ClientPlayNetworking.send(new ModPayloads.TrashCanLevelRequestC2SPayload());
+        MinecraftClient mc = MinecraftClient.getInstance();
+        if (mc.player != null && mc.player.playerScreenHandler instanceof PlayerScreenHandlerAccessor acc) {
+            acc.sv$getTrashSlot().setEnabled(ClientTrashCanData.getTrashLevel() > 0);
         }
     }
 
     @Inject(method = "drawBackground", at = @At("TAIL"))
     private void onDrawBg(DrawContext context, float delta, int mouseX, int mouseY, CallbackInfo ci) {
-        if (!(((Object) this) instanceof InventoryScreen)) return;
-        var w = MinecraftClient.getInstance().getWindow();
-        int guiLeft = (w.getScaledWidth() - 176) / 2;
-        int guiTop = (w.getScaledHeight() - 166) / 2;
-
-        int recipeBookOffset = 0;
-        if (MinecraftClient.getInstance().currentScreen instanceof RecipeBookScreen) {
-            var rbw = ((RecipeBookScreenAccessor) MinecraftClient.getInstance().currentScreen).getRecipeBook();
-            if (rbw.isOpen()) recipeBookOffset = 78;
-        }
+        HandledScreenAccessor origin = (HandledScreenAccessor) (Object) this;
+        int guiLeft = origin.sv$getX();
+        int guiTop = origin.sv$getY();
 
         // 装备栏
         for (int i = 0; i < EquipmentInventory.SLOT_COUNT; i++) {
-            int sx = guiLeft + 77 + recipeBookOffset;
+            int sx = guiLeft + 77;
             int sy = guiTop + 7 + i * 18;
             context.drawTexture(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, sx - 1, sy, 0.0f, 0.0f, 17, 17, 17, 17);
             var stack = ClientEquipmentData.getEquipment().getSlot(i);
@@ -69,7 +61,7 @@ public abstract class InventoryScreenMixin {
         }
 
         // 扩展背包按钮（在垃圾桶左侧）
-        int tx = guiLeft + TAB_SLOT_X + recipeBookOffset;
+        int tx = guiLeft + TAB_SLOT_X;
         int ty = guiTop + TAB_SLOT_Y;
 
         // 槽位框
@@ -82,24 +74,14 @@ public abstract class InventoryScreenMixin {
             context.fill(tx - 1, ty - 1, tx + 17, ty + 17, 0x44FFFFFF);
         }
 
-        // 垃圾桶（带装备栏框 + 半透明材质）
+        // 垃圾桶（外框 + 半透明材质；物品本身由真实槽位渲染）
         int trashLevel = ClientTrashCanData.getTrashLevel();
         if (trashLevel > 0 && trashLevel <= TRASH_TEXTURES.length) {
-            int trx = guiLeft + TRASH_SLOT_X + recipeBookOffset;
-            int try_ = guiTop + TRASH_SLOT_Y;
-
-            // 装备栏框
-            context.drawTexture(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, trx - 1, try_ - 1, 0.0f, 0.0f, 18, 18, 18, 18);
-
-            // 垃圾桶材质（半透明覆盖层模拟透明效果）
-            context.drawTexture(RenderPipelines.GUI_TEXTURED, TRASH_TEXTURES[trashLevel - 1], trx, try_, 0.0f, 0.0f, 16, 16, 16, 16);
-            context.fill(trx, try_, trx + 16, try_ + 16, 0x80FFFFFF);
-
-            var pending = ClientTrashCanData.getPendingItem();
-            if (!pending.isEmpty()) {
-                context.drawItem(pending, trx + 1, try_ + 1);
-                context.drawStackOverlay(MinecraftClient.getInstance().textRenderer, pending, trx + 1, try_ + 1);
-            }
+            int texX = guiLeft + TrashSlot.TEX_X;
+            int texY = guiTop + TrashSlot.TEX_Y;
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, SLOT_TEXTURE, texX - 1, texY - 1, 0.0f, 0.0f, 18, 18, 18, 18);
+            context.drawTexture(RenderPipelines.GUI_TEXTURED, TRASH_TEXTURES[trashLevel - 1], texX, texY, 0.0f, 0.0f, 16, 16, 16, 16);
+            context.fill(texX, texY, texX + 16, texY + 16, 0x80FFFFFF);
         }
     }
 }

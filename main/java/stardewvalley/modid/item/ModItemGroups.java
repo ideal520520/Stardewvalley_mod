@@ -113,7 +113,7 @@ public class ModItemGroups {
                 "wood", "hardwood", "bug_meat", "solar_essence",
                     // 动物制品/工匠物品
                     "cheese", "goat_cheese", "cheese_silver", "cheese_gold", "cheese_iridium", "goat_cheese_silver", "goat_cheese_gold", "goat_cheese_iridium",
-                    "mayonnaise", "void_mayonnaise", "duck_mayonnaise", "gold_mayonnaise",
+                    "mayonnaise", "void_mayonnaise", "duck_mayonnaise", "mayonnaise_gold",
                     "mayonnaise_silver", "mayonnaise_iridium",
                     "void_mayonnaise_silver", "void_mayonnaise_gold", "void_mayonnaise_iridium",
                     "duck_mayonnaise_silver", "duck_mayonnaise_gold", "duck_mayonnaise_iridium",
@@ -643,7 +643,7 @@ public class ModItemGroups {
                 entries.add(ModItems.ITEMS.get("coffee"));
                 entries.add(ModItems.ITEMS.get("mayonnaise"));
                 entries.add(ModItems.ITEMS.get("mayonnaise_silver"));
-                entries.add(ModItems.ITEMS.get("gold_mayonnaise"));
+                entries.add(ModItems.ITEMS.get("mayonnaise_gold"));
                 entries.add(ModItems.ITEMS.get("mayonnaise_iridium"));
                 entries.add(ModItems.ITEMS.get("duck_mayonnaise"));
                 entries.add(ModItems.ITEMS.get("duck_mayonnaise_silver"));
